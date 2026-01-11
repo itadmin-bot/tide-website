@@ -39,18 +39,14 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = useCallback(() => {
-    setIsOpen(prev => !prev);
-  }, []);
-
-  const closeMenu = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+  const toggleMenu = useCallback(() => setIsOpen(prev => !prev), []);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      if (isScrolled !== scrolled) setScrolled(isScrolled);
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 20 && !scrolled) setScrolled(true);
+      if (currentScrollY <= 20 && scrolled) setScrolled(false);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -70,61 +66,69 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 backdrop-blur-sm py-5 md:py-6'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95" onClick={closeMenu}>
-            <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 md:h-12 w-auto" />
-          </Link>
+    <>
+      <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 backdrop-blur-sm py-5'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <Link to="/" className="flex-shrink-0 transition-transform active:scale-95" onClick={closeMenu}>
+              <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 md:h-12 w-auto" />
+            </Link>
+            
+            {/* Desktop Nav */}
+            <div className="hidden md:flex space-x-8 items-center">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`font-accent text-[11px] tracking-[0.25em] uppercase font-bold transition-all hover:text-terracotta relative group ${
+                    location.pathname === link.path ? 'text-terracotta' : 'text-slate'
+                  }`}
+                >
+                  {link.name}
+                  <span className={`absolute -bottom-2 left-0 w-0 h-[1.5px] bg-terracotta transition-all duration-300 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`}></span>
+                </Link>
+              ))}
+              <Link
+                to="/booking"
+                className="bg-terracotta text-white px-8 py-3 font-accent text-[11px] tracking-[0.2em] uppercase font-black hover:bg-slate hover:shadow-xl transition-all"
+              >
+                Book Now
+              </Link>
+            </div>
+
+            {/* Burger Icon */}
+            <div className="md:hidden">
+              <button 
+                onClick={toggleMenu} 
+                className="text-slate p-2 focus:outline-none active:bg-sand/20 rounded-full transition-colors" 
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X size={28} className="text-black" /> : <Menu size={28} className="text-black" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay - Solid, Fast, High-Contrast */}
+      {isOpen && (
+        <div className="md:hidden fixed inset-0 bg-white z-[60] flex flex-col animate-fade-in">
+          {/* Menu Header */}
+          <div className="p-6 flex justify-between items-center border-b border-sand/20">
+            <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 w-auto" />
+            <button onClick={closeMenu} className="text-black p-2 active:bg-sand/20 rounded-full">
+              <X size={32} />
+            </button>
+          </div>
           
-          <div className="hidden md:flex space-x-8 lg:space-x-10 items-center">
+          {/* Menu Links */}
+          <div className="flex-1 px-8 flex flex-col justify-center space-y-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`font-accent text-[11px] tracking-[0.25em] uppercase font-bold transition-all hover:text-terracotta relative group ${
-                  location.pathname === link.path ? 'text-terracotta' : 'text-slate'
-                }`}
-              >
-                {link.name}
-                <span className={`absolute -bottom-2 left-0 w-0 h-[1.5px] bg-terracotta transition-all duration-300 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`}></span>
-              </Link>
-            ))}
-            <Link
-              to="/booking"
-              className="bg-terracotta text-white px-8 py-3 font-accent text-[11px] tracking-[0.2em] uppercase font-black hover:bg-slate hover:shadow-xl transition-all duration-300"
-            >
-              Book Now
-            </Link>
-          </div>
-
-          <div className="md:hidden">
-            <button 
-              onClick={toggleMenu} 
-              className="text-slate p-2 focus:outline-none active:scale-90 transition-transform duration-75" 
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <div className="md:hidden bg-white fixed inset-0 z-[100] animate-menu-in">
-          <div className="p-6 flex justify-between items-center border-b border-sand/10">
-            <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 w-auto" />
-            <button onClick={closeMenu} className="text-slate p-2 active:scale-90 transition-transform"><X size={32} /></button>
-          </div>
-          <div className="px-8 pt-6 flex flex-col space-y-6 h-[calc(100vh-140px)] justify-center">
-            {navLinks.map((link, idx) => (
-              <Link
-                key={link.name}
-                to={link.path}
                 onClick={closeMenu}
-                style={{ animationDelay: `${idx * 50}ms` }}
-                className={`text-3xl tracking-tight font-serif font-bold transition-colors animate-slide-up ${
+                className={`text-4xl font-serif font-bold tracking-tight transition-colors ${
                   location.pathname === link.path ? 'text-terracotta' : 'text-slate'
                 }`}
               >
@@ -134,21 +138,21 @@ const Navbar = () => {
             <Link
               to="/booking"
               onClick={closeMenu}
-              className="w-full bg-terracotta text-white text-center py-5 font-accent text-xs tracking-widest uppercase font-black shadow-xl mt-4 animate-slide-up"
-              style={{ animationDelay: '350ms' }}
+              className="w-full bg-terracotta text-white text-center py-6 font-accent text-xs tracking-widest uppercase font-black shadow-2xl mt-4"
             >
               Book Now
             </Link>
-            
-            <div className="pt-8 flex justify-center space-x-6 border-t border-sand/20 animate-fade-in" style={{ animationDelay: '450ms' }}>
-              <a href="https://www.instagram.com/tidehotelsandresorts" className="text-slate/40 hover:text-terracotta transition-colors"><Instagram size={24}/></a>
-              <a href="https://web.facebook.com/people/Tidé-Hotelsandresorts" className="text-slate/40 hover:text-terracotta transition-colors"><Facebook size={24}/></a>
-              <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="text-slate/40 hover:text-terracotta transition-colors"><MessageCircle size={24}/></a>
-            </div>
+          </div>
+          
+          {/* Menu Footer */}
+          <div className="p-8 border-t border-sand/10 flex justify-center space-x-10">
+            <a href="https://www.instagram.com/tidehotelsandresorts" className="text-slate hover:text-terracotta"><Instagram size={28}/></a>
+            <a href="https://web.facebook.com/people/Tidé-Hotelsandresorts" className="text-slate hover:text-terracotta"><Facebook size={28}/></a>
+            <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="text-slate hover:text-terracotta"><MessageCircle size={28}/></a>
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 
