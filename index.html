@@ -28,9 +28,9 @@
               accent: ['Tenor Sans', 'sans-serif'],
             },
             animation: {
-              'fade-in': 'fadeIn 1.2s ease-out forwards',
-              'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-              'reveal': 'reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards',
+              'fade-in': 'fadeIn 0.8s ease-out forwards',
+              'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'reveal': 'reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards',
               'slow-zoom': 'slowZoom 20s infinite alternate',
             },
             keyframes: {
@@ -39,7 +39,7 @@
                 '100%': { opacity: '1' },
               },
               slideUp: {
-                '0%': { transform: 'translateY(30px)', opacity: '0' },
+                '0%': { transform: 'translateY(15px)', opacity: '0' },
                 '100%': { transform: 'translateY(0)', opacity: '1' },
               },
               reveal: {
@@ -143,7 +143,7 @@
       
       .stagger-reveal > * {
         opacity: 0;
-        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
       
       a, button {

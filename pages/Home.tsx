@@ -7,7 +7,7 @@ import { TESTIMONIALS } from '../constants';
 const Home: React.FC = () => {
   return (
     <div className="space-y-0">
-      {/* Hero Section - Static Animation (On Load) */}
+      {/* Hero Section - Optimized Snappy Reveal */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
         <div className="absolute inset-0 z-0">
           <img 
@@ -18,17 +18,29 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/50"></div>
         </div>
         <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto pt-32">
-          <div className="stagger-reveal">
-            <span className="font-accent text-[11px] font-black block mb-8 text-shadow-premium tracking-[0.5em] text-sand uppercase">
+          <div className="flex flex-col items-center">
+            <span 
+              className="font-accent text-[11px] font-black block mb-8 text-shadow-premium tracking-[0.5em] text-sand uppercase opacity-0 animate-slide-up"
+              style={{ animationDelay: '100ms' }}
+            >
               Refining the Art of Stay
             </span>
-            <h1 className="hero-title font-serif text-shadow-premium">
+            <h1 
+              className="hero-title font-serif text-shadow-premium opacity-0 animate-slide-up"
+              style={{ animationDelay: '250ms' }}
+            >
               Tidé <span className="italic font-light text-sand/90">Hotels & Resorts</span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium text-pearl/90 max-w-3xl mx-auto leading-relaxed text-shadow-premium mb-12">
+            <p 
+              className="text-xl md:text-2xl font-medium text-pearl/90 max-w-3xl mx-auto leading-relaxed text-shadow-premium mb-12 opacity-0 animate-slide-up"
+              style={{ animationDelay: '400ms' }}
+            >
               Luxury boutique comfort in Abuja, where intentional design meets genuine Nigerian hospitality.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div 
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 animate-slide-up"
+              style={{ animationDelay: '550ms' }}
+            >
               <Link 
                 to="/booking"
                 className="bg-terracotta text-white px-10 py-5 font-accent text-[11px] font-black hover:bg-white hover:text-terracotta shadow-2xl w-full sm:w-auto tracking-[0.3em]"
