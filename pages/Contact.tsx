@@ -85,20 +85,21 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <h1 className="text-5xl font-serif mb-6">Get In Touch</h1>
+    <div className="pt-32 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
+        <div className="text-center mb-20 reveal-on-scroll sr-up">
+          <span className="text-terracotta font-accent text-[11px] font-black block mb-8 tracking-[0.5em] uppercase">CONNECT WITH US</span>
+          <h1 className="text-5xl md:text-6xl font-serif mb-6 font-bold">Get In Touch</h1>
           <p className="text-slate/60 max-w-xl mx-auto text-lg leading-relaxed">
-            Whether you have a reservation query or a corporate request, our team is here to assist you with genuine warmth.
+            Whether you have a reservation query or a corporate request, the Tidé Hotels & Resorts team is here to assist you with genuine warmth.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
           {/* Info Side */}
-          <div className="space-y-12">
+          <div className="space-y-12 reveal-on-scroll sr-right">
             <div>
-              <h3 className="text-2xl font-serif mb-8 text-terracotta">Contact Details</h3>
+              <h3 className="text-2xl font-serif mb-8 text-terracotta font-bold">Contact Details</h3>
               <div className="space-y-8">
                 <div className="flex items-start space-x-4">
                   <div className="bg-ivory p-3 text-terracotta">
@@ -131,7 +132,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="text-2xl font-serif mb-6 text-terracotta">Social Concierge</h3>
+              <h3 className="text-2xl font-serif mb-6 text-terracotta font-bold">Social Concierge</h3>
               <div className="flex space-x-6">
                 <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="p-4 bg-pearl rounded-full hover:bg-terracotta hover:text-white transition-all shadow-sm" title="Instagram"><Instagram /></a>
                 <a href="https://www.tiktok.com/@tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="p-4 bg-pearl rounded-full hover:bg-black hover:text-white transition-all shadow-sm" title="TikTok"><TikTokIcon /></a>
@@ -141,7 +142,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Form Side */}
-          <div className="bg-white p-8 md:p-12 shadow-2xl border border-sand/30 rounded-sm">
+          <div className="bg-white p-8 md:p-12 shadow-2xl border border-sand/30 rounded-sm reveal-on-scroll sr-left">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center space-y-4 animate-in fade-in duration-500">
                 <div className="w-16 h-16 bg-terracotta text-white rounded-full flex items-center justify-center mb-4">

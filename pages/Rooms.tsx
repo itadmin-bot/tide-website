@@ -12,8 +12,8 @@ const Rooms: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img src="https://i.ibb.co/DfHG7z0M/Exterior-Nighttime.jpg" alt="Rooms" className="w-full h-full object-cover brightness-[0.35] scale-110" />
         </div>
-        <div className="relative z-10 px-6 w-full max-w-5xl mx-auto text-white">
-          <span className="font-accent text-[11px] font-black block mb-8 tracking-[0.4em] text-sand">Accommodation</span>
+        <div className="relative z-10 px-6 w-full max-w-5xl mx-auto text-white pt-32">
+          <span className="font-accent text-[11px] font-black block mb-8 tracking-[0.5em] text-sand uppercase">Accommodation</span>
           <h1 className="hero-title font-serif">Rooms & <span className="italic font-light text-sand/70">Suites</span></h1>
           <p className="text-xl md:text-2xl text-pearl/80 mb-12 leading-relaxed content-measure mx-auto">
             Discover a collection of suites designed by Tidé Hotels & Resorts for the ultimate restorative stay.

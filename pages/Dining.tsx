@@ -16,9 +16,9 @@ const Dining: React.FC = () => {
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
         
-        <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto">
+        <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto pt-32">
           <div className="stagger-reveal">
-            <span className="font-accent text-[12px] font-black block mb-10 tracking-[0.5em] text-sand">Culinary Art</span>
+            <span className="font-accent text-[11px] font-black block mb-8 tracking-[0.5em] text-sand uppercase">Culinary Art</span>
             <h1 className="hero-title font-serif text-white font-bold text-shadow-premium">
               In-Room <span className="italic font-light text-pearl">Dining</span>
             </h1>

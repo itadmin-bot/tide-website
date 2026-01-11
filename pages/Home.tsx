@@ -17,9 +17,9 @@ const Home: React.FC = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/50"></div>
         </div>
-        <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto">
+        <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto pt-32">
           <div className="stagger-reveal">
-            <span className="font-accent text-[12px] md:text-sm block mb-6 animate-slide-up text-shadow-premium font-bold tracking-[0.5em]">
+            <span className="font-accent text-[11px] font-black block mb-8 animate-slide-up text-shadow-premium tracking-[0.5em] text-sand uppercase">
               Refining the Art of Stay
             </span>
             <h1 className="hero-title font-serif animate-slide-up text-shadow-premium">
