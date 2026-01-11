@@ -133,10 +133,12 @@
       .sr-down { transform: translateY(-40px); }
       .sr-left { transform: translateX(40px); }
       .sr-right { transform: translateX(-40px); }
+      .sr-scale { transform: scale(0.95); }
+      .sr-fade { transform: none; }
 
       .reveal-on-scroll.is-visible {
         opacity: 1;
-        transform: translate(0);
+        transform: translate(0) scale(1);
       }
       
       .stagger-reveal > * {
