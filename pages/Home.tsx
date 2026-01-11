@@ -1,121 +1,94 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Leaf, Heart, ArrowRight, Instagram } from 'lucide-react';
+import { ShieldCheck, Leaf, Heart, ArrowRight } from 'lucide-react';
 import { TESTIMONIALS } from '../constants';
 
 const Home: React.FC = () => {
-  const galleryImages = [
-    { 
-      url: "https://i.ibb.co/DfHG7z0M/Exterior-Nighttime.jpg", 
-      size: "col-span-2 row-span-2",
-      link: "https://www.instagram.com/tidehotelsandresorts"
-    },
-    { 
-      url: "https://i.ibb.co/hJrp4k8V/Recption-14.jpg", 
-      size: "col-span-1 row-span-1",
-      link: "https://www.tiktok.com/@tidehotelsandresorts"
-    },
-    { 
-      url: "https://i.ibb.co/q30Gv19B/Exterior-view1.jpg", 
-      size: "col-span-1 row-span-2",
-      link: "https://www.instagram.com/tidehotelsandresorts"
-    },
-    { 
-      url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=800", 
-      size: "col-span-1 row-span-1",
-      link: "https://www.instagram.com/tidehotelsandresorts"
-    },
-  ];
-
   return (
     <div className="space-y-0">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-32 md:py-48">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://i.ibb.co/DfHG7z0M/Exterior-Nighttime.jpg" 
-            alt="Tidé Hotels Exterior Night" 
+            alt="Tidé Hotels & Resorts Exterior Night" 
             className="w-full h-full object-cover brightness-[0.35] animate-slow-zoom" 
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/50"></div>
         </div>
-        <div className="relative z-10 text-center text-white px-6 w-full max-w-7xl mx-auto">
-          <div className="mb-6 md:mb-10">
-            <span className="font-accent uppercase tracking-[1em] text-[11px] md:text-sm block font-black animate-slide-up opacity-0 text-shadow-premium" style={{ animationDelay: '0.2s' }}>
+        <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto">
+          <div className="stagger-reveal">
+            <span className="font-accent text-[12px] md:text-sm block mb-6 animate-slide-up text-shadow-premium font-bold tracking-[0.5em]">
               Refining the Art of Stay
             </span>
-          </div>
-          <div className="mb-12 md:mb-16">
-            <h1 className="hero-title font-serif animate-slide-up opacity-0 text-shadow-premium pb-4" style={{ animationDelay: '0.4s' }}>
-              Tidé <span className="italic font-light opacity-90">Resorts</span>
+            <h1 className="hero-title font-serif animate-slide-up text-shadow-premium">
+              Tidé <span className="italic font-light text-sand/90">Hotels & Resorts</span>
             </h1>
-          </div>
-          <div className="mb-16 md:mb-24">
-            <p className="text-xl md:text-3xl lg:text-4xl font-medium text-pearl max-w-4xl mx-auto leading-relaxed animate-slide-up opacity-0 break-text text-shadow-premium px-4" style={{ animationDelay: '0.6s' }}>
+            <p className="text-xl md:text-2xl font-medium text-pearl/90 max-w-3xl mx-auto leading-relaxed animate-slide-up text-shadow-premium mb-12">
               Luxury boutique comfort in Abuja, where intentional design meets genuine Nigerian hospitality.
             </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in">
+              <Link 
+                to="/booking"
+                className="bg-terracotta text-white px-10 py-5 font-accent text-[11px] font-black hover:bg-white hover:text-terracotta shadow-2xl w-full sm:w-auto tracking-[0.3em]"
+              >
+                Secure Your Suite
+              </Link>
+              <Link 
+                to="/rooms"
+                className="border-2 border-white/40 text-white px-10 py-5 font-accent text-[11px] font-black hover:bg-white hover:text-slate backdrop-blur-md w-full sm:w-auto tracking-[0.3em]"
+              >
+                Explore Collection
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-6 md:gap-8 justify-center items-center animate-fade-in opacity-0 px-4" style={{ animationDelay: '1s' }}>
-            <Link 
-              to="/booking"
-              className="bg-terracotta text-white px-12 md:px-16 py-5 md:py-6 font-accent uppercase tracking-[0.3em] text-[12px] md:text-[13px] font-black hover:bg-white hover:text-terracotta transition-all duration-500 shadow-2xl w-full sm:w-auto text-center"
-            >
-              Secure Your Suite
-            </Link>
-            <Link 
-              to="/rooms"
-              className="border-2 border-white text-white px-12 md:px-16 py-5 md:py-6 font-accent uppercase tracking-[0.3em] text-[12px] md:text-[13px] font-black hover:bg-white hover:text-slate transition-all duration-500 w-full sm:w-auto text-center backdrop-blur-sm"
-            >
-              Explore Collection
-            </Link>
-          </div>
-        </div>
-        
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center space-y-4 animate-bounce opacity-70">
-          <span className="font-accent uppercase text-[10px] tracking-[0.6em] text-white font-bold">Discover</span>
-          <div className="w-[1px] h-20 bg-gradient-to-b from-white to-transparent"></div>
         </div>
       </section>
 
-      {/* Brand Ethos */}
-      <section className="bg-ivory py-32 md:py-56 px-6 sm:px-12 lg:px-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 md:gap-40 items-center">
-            <div className="space-y-12 md:space-y-16 reveal-on-scroll sr-right">
+      {/* Brand Ethos - Denser Editorial Layout */}
+      <section className="bg-ivory py-24 md:py-32 px-6">
+        <div className="content-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div className="lg:col-span-6 space-y-12 reveal-on-scroll sr-right">
               <div>
-                <span className="text-terracotta font-accent uppercase tracking-[0.6em] text-[13px] font-black block mb-8 border-l-4 border-terracotta pl-6">The Philosophy</span>
-                <h2 className="text-5xl md:text-8xl font-serif leading-[1.1] text-slate break-text">Thoughtful luxury, <br/><span className="italic font-light">not excess.</span></h2>
+                <span className="text-terracotta font-accent text-[11px] font-black block mb-6 pl-4 border-l-2 border-terracotta tracking-[0.3em]">THE PHILOSOPHY</span>
+                <h2 className="text-slate font-serif font-bold text-5xl leading-[1.1]">Thoughtful luxury, <br/><span className="italic font-light">not excess.</span></h2>
               </div>
-              <p className="text-slate text-2xl md:text-3xl leading-relaxed break-text font-medium opacity-90">
-                At Tidé, we prioritize your peace and productivity. Our spaces are curated to foster rejuvenation for the modern traveler.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 pt-8">
-                <div className="space-y-6 reveal-on-scroll sr-up" style={{ '--sr-delay': '0.2s' } as React.CSSProperties}>
-                  <div className="flex items-center space-x-6 text-terracotta">
-                    <ShieldCheck size={40} strokeWidth={1.5} />
-                    <h4 className="font-accent font-black text-[12px] uppercase tracking-[0.3em]">Discreet Security</h4>
+              <div className="space-y-6">
+                <p className="text-slate/80 text-2xl font-medium leading-relaxed">
+                  At Tidé Hotels & Resorts, we prioritize your peace and productivity. Our spaces are curated to foster rejuvenation for the modern traveler.
+                </p>
+                <p className="text-slate/60 text-[18px] leading-relaxed">
+                  Every material choice is selected with the single goal of providing an environment that feels as intelligent as it does welcoming.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 pt-4">
+                <div className="space-y-4 p-8 bg-white shadow-sm border border-sand/20 rounded-sm">
+                  <div className="flex items-center space-x-4 text-terracotta mb-4">
+                    <ShieldCheck size={32} strokeWidth={1.5} />
+                    <h4 className="font-accent font-black text-[10px] tracking-widest">Discreet Security</h4>
                   </div>
-                  <p className="text-[17px] text-slate font-semibold leading-relaxed break-text opacity-80">Safety is the ultimate luxury. Our teams provide 24/7 protection with a sophisticated touch.</p>
+                  <p className="text-[15px] text-slate/70 leading-relaxed font-medium">Safety is the ultimate luxury. Our teams provide protection with a sophisticated, invisible touch.</p>
                 </div>
-                <div className="space-y-6 reveal-on-scroll sr-up" style={{ '--sr-delay': '0.4s' } as React.CSSProperties}>
-                  <div className="flex items-center space-x-6 text-terracotta">
-                    <Leaf size={40} strokeWidth={1.5} />
-                    <h4 className="font-accent font-black text-[12px] uppercase tracking-[0.3em]">Sustainability</h4>
+                <div className="space-y-4 p-8 bg-white shadow-sm border border-sand/20 rounded-sm">
+                  <div className="flex items-center space-x-4 text-terracotta mb-4">
+                    <Leaf size={32} strokeWidth={1.5} />
+                    <h4 className="font-accent font-black text-[10px] tracking-widest">Sustainability</h4>
                   </div>
-                  <p className="text-[17px] text-slate font-semibold leading-relaxed break-text opacity-80">Eco-conscious operations that honor our environment while maintaining absolute excellence.</p>
+                  <p className="text-[15px] text-slate/70 leading-relaxed font-medium">Eco-conscious operations that honor our Nigerian environment while maintaining excellence.</p>
                 </div>
               </div>
             </div>
-            <div className="relative reveal-on-scroll sr-left">
-              <div className="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
-                <img src="https://i.ibb.co/hJrp4k8V/Recption-14.jpg" alt="Tidé Reception Area" className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" />
-              </div>
-              <div className="absolute -bottom-16 -left-12 md:-bottom-24 md:-left-20 w-[95%] md:w-[90%] bg-slate p-1.5 text-white shadow-[30px_30px_60px_-15px_rgba(0,0,0,0.5)]">
-                <div className="border border-white/10 w-full h-full flex flex-col justify-center p-12 md:p-20 space-y-10">
-                  <Heart size={56} className="text-terracotta fill-terracotta/20" />
-                  <h3 className="text-4xl md:text-5xl font-serif italic font-light break-text">Genuine Hospitality</h3>
-                  <p className="text-[17px] text-pearl font-medium tracking-wide leading-relaxed break-text opacity-80">We don't just host; we care. Every stay is a personalized experience crafted with deep intention and warmth.</p>
+            <div className="lg:col-span-6 relative reveal-on-scroll sr-left flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-md">
+                <div className="absolute -top-10 -right-10 w-full h-full border border-terracotta/20 -z-10 translate-x-4 translate-y-4"></div>
+                <div className="aspect-[3/4] overflow-hidden rounded-sm shadow-2xl">
+                  <img src="https://i.ibb.co/hJrp4k8V/Recption-14.jpg" alt="Tidé Reception" className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" />
+                </div>
+                <div className="absolute -bottom-10 -left-10 w-[110%] bg-slate p-10 text-white shadow-2xl border border-white/5">
+                  <Heart size={40} className="text-terracotta mb-6" />
+                  <h3 className="text-2xl font-serif italic font-light mb-4 leading-tight">Genuine Hospitality <br/><span className="text-xs uppercase tracking-[0.4em] font-black text-pearl/50">Personalized with Intent</span></h3>
                 </div>
               </div>
             </div>
@@ -123,83 +96,47 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Promo */}
-      <section className="relative py-60 md:py-80 overflow-hidden">
+      {/* Narrative Section - Full Width Fill */}
+      <section className="relative py-32 md:py-40 overflow-hidden text-center bg-slate">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://i.ibb.co/q30Gv19B/Exterior-view1.jpg" 
-            alt="Tidé Hotels Exterior Daytime" 
-            className="w-full h-full object-cover brightness-[0.4]" 
-          />
+          <img src="https://i.ibb.co/q30Gv19B/Exterior-view1.jpg" alt="Sanctuary" className="w-full h-full object-cover opacity-20 scale-105" />
         </div>
-        <div className="relative z-10 max-w-5xl mx-auto text-center text-white px-6 reveal-on-scroll sr-scale">
-          <h2 className="text-5xl md:text-8xl font-serif mb-12 leading-tight break-text text-shadow-premium">Your Sanctuary in the Capital</h2>
-          <p className="text-2xl md:text-4xl font-medium mb-20 text-pearl leading-relaxed break-text max-w-4xl mx-auto">
-            Experience the Tidé standard: where every pillow is fluffed with care and every business meeting feels like a premium retreat.
+        <div className="relative z-10 max-w-4xl mx-auto px-6 reveal-on-scroll sr-scale">
+          <h2 className="text-white font-serif mb-8 text-5xl">Your Sanctuary in the Capital</h2>
+          <p className="text-xl md:text-2xl text-pearl/80 mb-12 leading-relaxed content-measure font-medium">
+            Experience the Tidé Hotels & Resorts standard: where every pillow is fluffed with care and every business meeting feels like a premium retreat.
           </p>
-          <Link to="/rooms" className="inline-flex items-center space-x-6 bg-white text-slate px-16 py-7 font-accent uppercase tracking-[0.4em] text-[13px] font-black hover:bg-terracotta hover:text-white transition-all shadow-2xl group">
-            <span>View Guest Rooms</span>
-            <ArrowRight size={20} className="transition-transform group-hover:translate-x-3" />
+          <Link to="/rooms" className="inline-flex items-center space-x-6 bg-terracotta text-white px-12 py-5 font-accent text-[11px] font-black hover:bg-white hover:text-slate transition-all shadow-2xl group tracking-[0.3em]">
+            <span>EXPLORE GUEST ROOMS</span>
+            <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
           </Link>
         </div>
       </section>
 
-      {/* Moments of Tidé Gallery */}
-      <section className="py-32 md:py-56 bg-ivory/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12 reveal-on-scroll sr-up">
-            <div className="space-y-6">
-              <span className="text-terracotta font-accent uppercase tracking-[0.6em] text-[13px] font-black block">@tidehotelsandresorts</span>
-              <h2 className="text-5xl md:text-8xl font-serif text-slate font-bold">Moments of Tidé</h2>
+      {/* Testimonials - Designed to feel dense */}
+      <section className="py-24 bg-white px-6">
+        <div className="content-container">
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+            <div className="max-w-xl">
+              <span className="text-terracotta font-accent text-[11px] font-black block mb-4 tracking-[0.4em]">VOICES OF TIDÉ</span>
+              <h2 className="text-slate font-serif font-bold text-5xl">Guest Experiences</h2>
             </div>
-            <div className="flex space-x-8">
-              <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="font-accent text-[12px] uppercase tracking-[0.4em] font-black border-b-2 border-terracotta pb-3 hover:text-terracotta transition-colors">Instagram</a>
-              <a href="https://www.tiktok.com/@tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="font-accent text-[12px] uppercase tracking-[0.4em] font-black border-b-2 border-terracotta pb-3 hover:text-terracotta transition-colors">TikTok</a>
-            </div>
+            <p className="text-slate/40 font-accent text-[10px] tracking-[0.3em] font-black uppercase mb-2">Authentic feedback from our community</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 min-h-[600px] md:min-h-[800px]">
-            {galleryImages.map((img, i) => (
-              <a 
-                key={i} 
-                href={img.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${img.size} overflow-hidden rounded-sm group reveal-on-scroll sr-up block relative shadow-xl`} 
-                style={{ '--sr-delay': `${i * 0.15}s` } as React.CSSProperties}
-              >
-                <img src={img.url} alt="Gallery item" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-terracotta/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                   <div className="bg-white/90 p-5 rounded-full shadow-2xl transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">
-                     <Instagram size={32} className="text-terracotta" />
-                   </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-32 md:py-56 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-24 md:mb-40 reveal-on-scroll sr-up">
-            <span className="text-terracotta font-accent uppercase tracking-[0.6em] text-[13px] font-black block mb-8">Voices of Tidé</span>
-            <h2 className="text-5xl md:text-8xl font-serif break-text font-bold text-slate">Guest Experiences</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-20 md:gap-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-sand/20 shadow-sm">
             {TESTIMONIALS.map((t, i) => (
-              <div key={t.id} className="space-y-10 md:space-y-14 reveal-on-scroll sr-up" style={{ '--sr-delay': `${i * 0.2}s` } as React.CSSProperties}>
-                <div className="text-8xl md:text-9xl font-serif text-terracotta/20 leading-none h-12">“</div>
-                <p className="text-3xl md:text-4xl font-serif italic text-slate leading-relaxed break-text font-medium px-2">
+              <div key={t.id} className={`p-12 space-y-8 reveal-on-scroll sr-up border-sand/10 ${i !== 2 ? 'md:border-r' : ''}`} style={{ transitionDelay: `${i * 150}ms` }}>
+                <div className="text-6xl font-serif text-terracotta/20 leading-none">“</div>
+                <p className="text-xl font-serif italic text-slate/90 leading-relaxed font-medium">
                   {t.content}
                 </p>
-                <div className="pt-12 border-t border-sand/30 flex items-center space-x-6">
-                  <div className="w-16 h-1px bg-terracotta"></div>
-                  <div>
-                    <p className="font-accent font-black text-slate uppercase tracking-[0.3em] text-[13px] break-text">{t.name}</p>
-                    <p className="text-terracotta font-accent text-[11px] uppercase tracking-[0.4em] mt-3 break-text font-black">{t.role}</p>
-                  </div>
+                <div className="pt-8 flex items-center space-x-4">
+                   <div className="w-8 h-[1px] bg-terracotta"></div>
+                   <div>
+                    <p className="font-accent font-black text-slate text-[10px] tracking-widest">{t.name}</p>
+                    <p className="text-terracotta font-accent text-[9px] mt-1 font-black tracking-widest uppercase">{t.role}</p>
+                   </div>
                 </div>
               </div>
             ))}
@@ -207,23 +144,29 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="bg-slate py-48 md:py-64 text-white overflow-hidden relative">
-        <div className="max-w-5xl mx-auto px-8 text-center relative z-10 reveal-on-scroll sr-up">
-          <h2 className="text-6xl md:text-9xl font-serif mb-12 italic font-light leading-none">Ready to enrich <br/>your life?</h2>
-          <p className="mb-20 text-pearl text-2xl md:text-4xl font-medium max-w-3xl mx-auto leading-relaxed opacity-80">
-            Whether for business or pleasure, your journey to restorative hospitality begins here.
+      {/* Final CTA - Visual Density */}
+      <section className="bg-ivory py-32 text-center px-6 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-terracotta"></div>
+        <div className="max-w-3xl mx-auto relative z-10 reveal-on-scroll sr-up">
+          <h2 className="font-serif italic font-light mb-8 text-5xl md:text-7xl text-slate">Ready to enrich <br/>your life?</h2>
+          <p className="text-xl text-slate/60 mb-12 leading-relaxed font-medium">
+            Whether for business or pleasure, your journey to restorative hospitality at Tidé Hotels & Resorts begins here.
           </p>
-          <Link 
-            to="/booking" 
-            className="inline-block bg-terracotta text-white px-20 py-8 font-accent uppercase tracking-[0.5em] text-[14px] font-black hover:bg-white hover:text-slate transition-all shadow-[0_20px_60px_-15px_rgba(140,68,17,0.5)]"
-          >
-            Check Direct Availability
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Link 
+              to="/booking" 
+              className="bg-slate text-white px-16 py-6 font-accent text-[12px] font-black hover:bg-terracotta transition-all shadow-2xl tracking-[0.4em]"
+            >
+              BOOK DIRECTLY
+            </Link>
+            <Link 
+              to="/about" 
+              className="bg-transparent border border-slate text-slate px-16 py-6 font-accent text-[12px] font-black hover:bg-slate hover:text-white transition-all tracking-[0.4em]"
+            >
+              LEARN MORE
+            </Link>
+          </div>
         </div>
-        {/* Abstract shapes */}
-        <div className="absolute -bottom-40 -right-40 w-[40rem] h-[40rem] bg-terracotta opacity-[0.03] rounded-full blur-3xl"></div>
-        <div className="absolute top-0 -left-40 w-[30rem] h-[30rem] bg-white opacity-[0.02] rounded-full blur-3xl"></div>
       </section>
     </div>
   );

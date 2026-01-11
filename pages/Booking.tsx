@@ -27,7 +27,7 @@ const Booking: React.FC = () => {
           <div className="text-center space-y-6 max-w-3xl mx-auto reveal-on-scroll sr-up">
             <h1 className="text-5xl md:text-7xl font-serif text-slate font-bold">Secure Your Sanctuary</h1>
             <p className="text-slate/60 text-lg md:text-xl leading-relaxed">
-              Experience the best of Tidé by reserving your stay through our official channels. 
+              Experience the best of Tidé Hotels & Resorts by reserving your stay through our official channels. 
               Choose your preferred booking method below.
             </p>
           </div>
@@ -64,7 +64,7 @@ const Booking: React.FC = () => {
             </div>
 
             {/* Option 2: Personalized Form */}
-            <div className="bg-white p-10 md:p-14 shadow-2xl border border-sand/30 flex flex-col h-full reveal-on-scroll sr-left" style={{ '--sr-delay': '0.2s' } as React.CSSProperties}>
+            <div className="bg-white p-10 md:p-14 shadow-2xl border border-sand/30 flex flex-col h-full reveal-on-scroll sr-left">
               <div className="w-16 h-16 bg-ivory text-terracotta rounded-full flex items-center justify-center mb-8">
                 <UserCheck size={32} />
               </div>
@@ -98,7 +98,7 @@ const Booking: React.FC = () => {
               <div className="space-y-4">
                 <h4 className="text-xs font-black uppercase tracking-widest text-slate">Privacy & Data Protection</h4>
                 <p className="text-sm text-slate/70 leading-relaxed break-text">
-                  All information provided will be kept strictly confidential, securely stored, and used solely for the purpose of managing your booking in line with the **Nigeria Data Protection Act (NDPA) of 2023**. We value your trust as highly as your comfort.
+                  All information provided will be kept strictly confidential, securely stored, and used solely for the purpose of managing your booking in line with the Nigeria Data Protection Act (NDPA) of 2023. We value your trust as highly as your comfort.
                 </p>
               </div>
             </div>

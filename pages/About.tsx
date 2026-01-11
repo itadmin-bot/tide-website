@@ -3,106 +3,109 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <div className="pb-32">
-      {/* Hero */}
-      <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-center py-32 md:py-48 overflow-hidden">
+    <div className="pb-16">
+      {/* Hero - Full Screen Immersive */}
+      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden text-center">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://i.ibb.co/q30Gv19B/Exterior-view1.jpg" 
-            alt="Tidé Hotels Daytime Exterior" 
-            className="w-full h-full object-cover brightness-[0.35] scale-105" 
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
+          <img src="https://i.ibb.co/q30Gv19B/Exterior-view1.jpg" alt="Heritage" className="w-full h-full object-cover brightness-[0.4] scale-110" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-ivory"></div>
         </div>
-        
-        <div className="relative z-10 text-center text-white px-6 w-full max-w-6xl mx-auto">
-          <div className="stagger-reveal">
-            <span className="text-sand font-accent uppercase tracking-[0.4em] text-[11px] md:text-[13px] font-black block mb-8">Our Heritage</span>
-            <h1 className="hero-title font-serif mb-10 leading-none text-white font-bold text-shadow-premium">
-              Philosophy of <span className="italic font-light text-pearl">Intention</span>
-            </h1>
-            <p className="text-xl md:text-3xl lg:text-4xl font-serif italic font-medium text-pearl leading-relaxed break-text max-w-4xl mx-auto text-shadow-premium px-4">
-              "At Tidé, we believe luxury isn't about excess; it's about the space to breathe and the sophistication of design."
-            </p>
-          </div>
+        <div className="relative z-10 px-6 w-full max-w-5xl mx-auto text-white">
+          <span className="font-accent text-[12px] font-black block mb-6 tracking-[0.6em] text-sand animate-fade-in">Our Heritage</span>
+          <h1 className="hero-title font-serif">Philosophy of <span className="italic font-light text-sand/70">Intention</span></h1>
+          <p className="text-2xl md:text-3xl font-serif italic text-pearl/90 leading-relaxed content-measure animate-slide-up">
+            "At Tidé Hotels & Resorts, we believe luxury isn't about excess; it's about the space to breathe and the sophistication of design."
+          </p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-24 md:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center mb-40">
-          <div className="space-y-10 reveal-on-scroll sr-right">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate leading-tight">A Sanctuary in the Capital</h2>
-            <p className="text-slate text-xl leading-relaxed font-medium break-text">
-              Located in the heart of Abuja, Tidé Hotels & Resorts was born out of a desire to create a restorative escape for both leisure and business travelers. We recognized that modern travel often demands high performance, leaving little room for rejuvenation.
-            </p>
-            <p className="text-slate text-xl leading-relaxed font-medium break-text">
-              Every corner of our boutique property is designed with purpose—from the sustainable materials used in our furniture to the curated lighting that mimics the natural rhythms of the day. Our goal is to enrich lives through hospitality that heals and inspires.
-            </p>
+      {/* Main Story - Editorial Layout */}
+      <div className="content-container px-6 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          <div className="lg:col-span-6 space-y-10 reveal-on-scroll sr-right">
+            <span className="text-terracotta font-accent text-[11px] font-black tracking-[0.4em] block">The Genesis</span>
+            <h2 className="text-slate font-serif font-bold leading-[1.1]">A Sanctuary in <br/>the Capital</h2>
+            <div className="space-y-8 text-slate/80 text-xl leading-relaxed font-medium">
+              <p>
+                Located in the heart of Abuja, Tidé Hotels & Resorts was born out of a desire to create a restorative escape for both leisure and business travelers.
+              </p>
+              <p>
+                Every corner of our boutique property is designed with purpose—from the sustainable materials used in our furniture to the curated lighting that mimics natural circadian rhythms.
+              </p>
+              <p className="text-slate/60 text-lg border-l-2 border-sand pl-8 py-2 italic">
+                We believe that hospitality is a tool for enrichment. By providing an environment of calm and focus, we empower our guests to return to their world rejuvenated.
+              </p>
+            </div>
           </div>
-          <div className="relative group reveal-on-scroll sr-left">
-            <div className="absolute inset-0 bg-terracotta/10 rounded-sm group-hover:bg-transparent transition-colors duration-500"></div>
-            <img 
-              src="https://i.ibb.co/q30Gv19B/Exterior-view1.jpg" 
-              alt="Tidé Hotels Daytime Exterior" 
-              className="rounded-sm shadow-2xl w-full h-[600px] object-cover" 
-            />
+          <div className="lg:col-span-6 reveal-on-scroll sr-left">
+            <div className="relative pt-12">
+              <div className="absolute top-0 right-0 w-2/3 h-full bg-sand/10 -z-10 translate-x-12"></div>
+              <img src="https://i.ibb.co/q30Gv19B/Exterior-view1.jpg" alt="Sanctuary" className="rounded-sm shadow-2xl w-full h-[600px] object-cover hover:scale-105 transition-transform duration-1000" />
+            </div>
           </div>
         </div>
 
-        <div className="bg-slate -mx-6 sm:-mx-10 lg:-mx-12 px-6 sm:px-10 lg:px-12 py-32 mb-40 shadow-inner">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-              <div className="bg-white/5 p-8 border border-white/10 reveal-on-scroll sr-up" style={{ '--sr-delay': '0s' } as React.CSSProperties}>
-                <h3 className="text-sand font-accent uppercase tracking-[0.3em] text-[12px] font-black mb-6 border-b border-white/10 pb-4">Our Mission</h3>
-                <p className="text-white text-[17px] leading-relaxed font-medium break-text">To provide an unparalleled boutique experience that prioritizes guest well-being and environmental stewardship through operational excellence.</p>
+        {/* The Pillars - Redesigned to be dense and "designed" */}
+        <div className="mt-32 pt-24 border-t border-sand/30">
+          <div className="text-center mb-20">
+            <span className="text-terracotta font-accent text-[11px] font-black tracking-[0.5em] block mb-4 uppercase">The Foundation</span>
+            <h2 className="text-slate font-serif italic font-light">The Pillars of Tidé Hotels & Resorts</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-sand/30 bg-white shadow-xl overflow-hidden rounded-sm">
+            {/* Mission */}
+            <div className="p-12 md:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-sand/20 hover:bg-ivory/50 transition-colors group">
+              <div className="space-y-8">
+                <div className="text-5xl font-serif text-terracotta/20 group-hover:text-terracotta/40 transition-colors">01</div>
+                <h3 className="font-accent text-[12px] font-black text-slate tracking-[0.4em] uppercase">Our Mission</h3>
+                <p className="text-slate/80 text-xl leading-relaxed font-medium">
+                  Providing an unparalleled boutique experience prioritizing guest well-being and environmental stewardship through absolute operational excellence.
+                </p>
               </div>
-              <div className="bg-white/5 p-8 border border-white/10 reveal-on-scroll sr-up" style={{ '--sr-delay': '0.2s' } as React.CSSProperties}>
-                <h3 className="text-sand font-accent uppercase tracking-[0.3em] text-[12px] font-black mb-6 border-b border-white/10 pb-4">Our Values</h3>
-                <ul className="space-y-4 text-white text-[17px] font-bold">
-                  <li className="flex items-center space-x-3">
-                    <span className="w-2 h-2 bg-terracotta rounded-full"></span>
-                    <span>Intentional detail</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <span className="w-2 h-2 bg-terracotta rounded-full"></span>
-                    <span>Genuine human connection</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <span className="w-2 h-2 bg-terracotta rounded-full"></span>
-                    <span>Sustainable luxury</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <span className="w-2 h-2 bg-terracotta rounded-full"></span>
-                    <span>Operational transparency</span>
-                  </li>
+            </div>
+
+            {/* Values */}
+            <div className="p-12 md:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-sand/20 bg-ivory/30 group">
+              <div className="space-y-8">
+                <div className="text-5xl font-serif text-terracotta/20 group-hover:text-terracotta/40 transition-colors">02</div>
+                <h3 className="font-accent text-[12px] font-black text-slate tracking-[0.4em] uppercase">Our Values</h3>
+                <ul className="space-y-5">
+                  {["Intentional Detail", "Genuine Connection", "Sustainable Luxury"].map((value, idx) => (
+                    <li key={idx} className="flex items-center space-x-4">
+                      <div className="w-1.5 h-1.5 bg-terracotta rotate-45"></div>
+                      <span className="text-slate text-xl font-bold italic">{value}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
-              <div className="bg-white/5 p-8 border border-white/10 reveal-on-scroll sr-up" style={{ '--sr-delay': '0.4s' } as React.CSSProperties}>
-                <h3 className="text-sand font-accent uppercase tracking-[0.3em] text-[12px] font-black mb-6 border-b border-white/10 pb-4">Sustainability</h3>
-                <p className="text-white text-[17px] leading-relaxed font-medium break-text">We are committed to reducing our carbon footprint through eco-conscious practices, local sourcing, and aggressive waste reduction programs.</p>
-              </div>
             </div>
-          </div>
-        </div>
 
-        <div className="text-center">
-          <h2 className="text-5xl md:text-7xl font-serif mb-16 text-slate reveal-on-scroll sr-up">Experience the Tidé Standard</h2>
-          <div className="flex flex-wrap justify-center gap-12">
-            <div className="w-full md:w-[45%] lg:w-1/3 group reveal-on-scroll sr-right">
-               <div className="overflow-hidden rounded-sm mb-6 shadow-xl">
-                 <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&q=80&w=800" alt="About" className="w-full aspect-[4/3] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105" />
-               </div>
-               <p className="font-accent text-[12px] uppercase tracking-[0.4em] font-black text-slate group-hover:text-terracotta transition-colors">Thoughtful Service</p>
-            </div>
-            <div className="w-full md:w-[45%] lg:w-1/3 group reveal-on-scroll sr-left">
-               <div className="overflow-hidden rounded-sm mb-6 shadow-xl">
-                 <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=800" alt="About" className="w-full aspect-[4/3] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105" />
-               </div>
-               <p className="font-accent text-[12px] uppercase tracking-[0.4em] font-black text-slate group-hover:text-terracotta transition-colors">Restorative Space</p>
+            {/* Sustainability */}
+            <div className="p-12 md:p-16 flex flex-col justify-between hover:bg-ivory/50 transition-colors group">
+              <div className="space-y-8">
+                <div className="text-5xl font-serif text-terracotta/20 group-hover:text-terracotta/40 transition-colors">03</div>
+                <h3 className="font-accent text-[12px] font-black text-slate tracking-[0.4em] uppercase">Sustainability</h3>
+                <p className="text-slate/80 text-xl leading-relaxed font-medium">
+                  We are committed to aggressive waste reduction and local sourcing to ensure our environmental footprint is as minimal as our aesthetic.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Narrative Section to fill space and add depth */}
+      <section className="bg-slate py-24 text-white overflow-hidden relative">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h2 className="font-serif italic font-light text-4xl md:text-5xl mb-8">Crafting Unforgettable Moments</h2>
+          <p className="text-xl text-pearl/70 leading-relaxed font-medium">
+            Tidé Hotels & Resorts isn't just a place to stay—it's a commitment to enriching your life through restorative hospitality and the pursuit of operational excellence.
+          </p>
+        </div>
+        <div className="absolute top-1/2 left-0 w-full text-[15rem] font-serif text-white/[0.02] -translate-y-1/2 select-none pointer-events-none whitespace-nowrap">
+          AUTHENTIC LUXURY • TIDE HOTELS • RESTORATIVE STAY
+        </div>
+      </section>
     </div>
   );
 };
