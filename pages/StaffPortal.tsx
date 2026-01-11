@@ -32,14 +32,14 @@ const StaffPortal: React.FC = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center bg-ivory/50 px-4 animate-fade-in">
-        <div className="max-w-md w-full bg-white p-12 rounded-sm shadow-2xl border border-sand">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-ivory/50 px-4 pt-32 pb-20 animate-fade-in">
+        <div className="max-w-md w-full bg-white p-10 md:p-12 rounded-sm shadow-2xl border border-sand">
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-slate text-white rounded-full mb-8 shadow-inner">
               <Lock size={36} />
             </div>
-            <h1 className="text-4xl font-serif">Internal Portal</h1>
-            <p className="text-slate/40 text-[10px] uppercase tracking-[0.3em] mt-3">Authorized Personnel Only</p>
+            <h1 className="text-4xl font-serif font-bold text-slate">Internal Portal</h1>
+            <p className="text-terracotta text-[10px] uppercase tracking-[0.3em] mt-3 font-black">Authorized Personnel Only</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-8">
             <div className="animate-slide-up">
@@ -77,11 +77,11 @@ const StaffPortal: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 animate-fade-in">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-20 animate-fade-in">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
         <div>
-          <h1 className="text-5xl font-serif mb-3">Operations Center</h1>
-          <p className="text-slate/40 uppercase tracking-[0.4em] text-[10px]">Tidé Hotels & Resorts Management Suite</p>
+          <h1 className="text-5xl font-serif mb-3 font-bold text-slate">Operations Center</h1>
+          <p className="text-terracotta uppercase tracking-[0.4em] text-[10px] font-black">Tidé Hotels & Resorts Management Suite</p>
         </div>
         <button 
           onClick={() => setIsAuthenticated(false)}
@@ -111,7 +111,7 @@ const StaffPortal: React.FC = () => {
                 </div>
                 <div className="flex-grow">
                   <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-terracotta block mb-3">{link.category}</span>
-                  <h3 className="text-2xl font-serif mb-4 group-hover:text-terracotta transition-colors break-text">{link.title}</h3>
+                  <h3 className="text-2xl font-serif mb-4 group-hover:text-terracotta transition-colors break-text font-bold">{link.title}</h3>
                   <p className="text-xs text-slate/50 leading-relaxed break-text">{link.description}</p>
                 </div>
               </a>
@@ -122,7 +122,7 @@ const StaffPortal: React.FC = () => {
         <div className="space-y-12">
           <div className="bg-slate text-white p-10 rounded-sm shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-terracotta opacity-10 rounded-full -mr-16 -mt-16"></div>
-            <h3 className="text-2xl font-serif mb-8 flex items-center space-x-4 relative z-10 break-text">
+            <h3 className="text-2xl font-serif mb-8 flex items-center space-x-4 relative z-10 break-text font-bold">
               <Users size={24} className="text-terracotta" />
               <span>Team Directory</span>
             </h3>
