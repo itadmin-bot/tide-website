@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, Linkedin, Facebook, MessageCircle, Phone, MapPin, Mail, Lock } from 'lucide-react';
@@ -145,7 +144,7 @@ const Navbar = () => {
             
             <div className="pt-10 flex justify-center space-x-8 border-t border-sand/30 animate-fade-in mt-auto" style={{ animationDelay: '550ms' }}>
               <a href="https://www.instagram.com/tidehotelsandresorts" className="text-slate/60 hover:text-terracotta transition-colors"><Instagram size={28}/></a>
-              <a href="https://web.facebook.com/people/Tidé-Hotelsandresorts" className="text-slate/60 hover:text-terracotta transition-colors"><Facebook size={28}/></a>
+              <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" className="text-slate/60 hover:text-terracotta transition-colors"><Facebook size={28}/></a>
               <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="text-slate/60 hover:text-terracotta transition-colors"><MessageCircle size={28}/></a>
             </div>
           </div>
@@ -201,7 +200,7 @@ const Footer = () => {
             <div className="flex space-x-6 mb-8 md:mb-12">
               <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Instagram"><Instagram size={24} /></a>
               <a href="https://www.linkedin.com/company/tidé-hotels/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="LinkedIn"><Linkedin size={24} /></a>
-              <a href="https://web.facebook.com/people/Tidé-Hotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Facebook"><Facebook size={24} /></a>
+              <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Facebook"><Facebook size={24} /></a>
               <a href="https://www.tiktok.com/@tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="TikTok"><TikTokIcon size={24} /></a>
             </div>
             <Link to="/staff" className="inline-flex items-center space-x-4 font-accent text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-sand hover:text-white transition-all border border-white/10 rounded-sm px-6 py-4 w-full justify-center hover:bg-white/5">
