@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Tidé Hotels & Resorts",
+  "description": "A luxury boutique hotel website for Tidé Hotels & Resorts in Abuja, Nigeria, featuring elegant design, room booking, and a secure staff portal.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

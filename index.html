@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tidé Hotels & Resorts | Luxury Boutique Comfort in Abuja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              terracotta: '#8C4411',
+              olive: '#625535',
+              slate: '#343A3F',
+              sand: '#D8CDB0',
+              ivory: '#F7F2DD',
+              pearl: '#EEE9E9',
+              white: '#FFFFFF',
+              black: '#000000',
+            },
+            fontFamily: {
+              serif: ['Cormorant Garamond', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+              accent: ['Tenor Sans', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 1.2s ease-out forwards',
+              'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'reveal': 'reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards',
+              'slow-zoom': 'slowZoom 20s infinite alternate',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(30px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              reveal: {
+                '0%': { transform: 'translateY(100%)' },
+                '100%': { transform: 'translateY(0)' },
+              },
+              slowZoom: {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.1)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        height: -webkit-fill-available;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #F7F2DD;
+        color: #343A3F;
+        overflow-x: hidden;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.6;
+      }
+      #root {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      h1, h2, h3, h4, .font-serif {
+        font-family: 'Cormorant Garamond', serif;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        font-weight: 600;
+      }
+      .font-accent {
+        font-family: 'Tenor Sans', sans-serif;
+      }
+      .break-text {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+      }
+
+      /* Scroll Reveal System */
+      .reveal-on-scroll {
+        opacity: 0;
+        will-change: transform, opacity;
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--sr-delay, 0s);
+      }
+      
+      .sr-up { transform: translateY(60px); }
+      .sr-down { transform: translateY(-60px); }
+      .sr-left { transform: translateX(60px); }
+      .sr-right { transform: translateX(-60px); }
+      .sr-scale { transform: scale(0.92); }
+
+      .reveal-on-scroll.is-visible {
+        opacity: 1;
+        transform: translate(0) scale(1);
+      }
+      
+      /* Immediate animations for hero items */
+      .stagger-reveal > * {
+        opacity: 0;
+        animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .stagger-reveal > *:nth-child(1) { animation-delay: 0.1s; }
+      .stagger-reveal > *:nth-child(2) { animation-delay: 0.2s; }
+      .stagger-reveal > *:nth-child(3) { animation-delay: 0.3s; }
+      .stagger-reveal > *:nth-child(4) { animation-delay: 0.4s; }
+      
+      a, button {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #F7F2DD;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #8C4411;
+      }
+      
+      .text-shadow-premium {
+        text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      }
+
+      .hero-title {
+        font-size: clamp(3.5rem, 10vw, 9rem);
+        line-height: 1.1;
+        word-break: break-word;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: clamp(3rem, 12vw, 4.5rem);
+        }
+      }
+
+      /* Leaflet custom styles */
+      .leaflet-container {
+        font-family: 'Inter', sans-serif;
+        background: #F7F2DD;
+      }
+      .leaflet-popup-content-wrapper {
+        border-radius: 0;
+        padding: 8px;
+        background: #FFFFFF;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      }
+      .leaflet-popup-tip {
+        background: #FFFFFF;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "leaflet": "https://esm.sh/leaflet@1.9.4"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Scroll Reveal Observer
+      const setupRevealObserver = () => {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        }, observerOptions);
+
+        const targets = document.querySelectorAll('.reveal-on-scroll');
+        targets.forEach(target => observer.observe(target));
+
+        return observer;
+      };
+
+      // Handle SPA navigation with MutationObserver
+      let revealObserver = setupRevealObserver();
+      const mutationObserver = new MutationObserver(() => {
+        revealObserver.disconnect();
+        revealObserver = setupRevealObserver();
+      });
+
+      mutationObserver.observe(document.body, { 
+        childList: true, 
+        subtree: true 
+      });
+    </script>
+  </body>
+</html>
