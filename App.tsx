@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, Linkedin, Facebook, MessageCircle, Phone, MapPin, Mail, Lock } from 'lucide-react';
 import Home from './pages/Home.tsx';
@@ -39,18 +39,25 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  const toggleMenu = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsOpen(false);
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      if (isScrolled !== scrolled) setScrolled(isScrolled);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
   const navLinks = [
@@ -63,10 +70,10 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 backdrop-blur-sm py-5 md:py-6'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 backdrop-blur-sm py-5 md:py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105">
+          <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95" onClick={closeMenu}>
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 md:h-12 w-auto" />
           </Link>
           
@@ -92,26 +99,32 @@ const Navbar = () => {
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-slate p-2 focus:outline-none" aria-label="Toggle menu">
+            <button 
+              onClick={toggleMenu} 
+              className="text-slate p-2 focus:outline-none active:scale-90 transition-transform duration-75" 
+              aria-label="Toggle menu"
+            >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden bg-white fixed inset-0 z-[100] animate-in slide-in-from-top duration-500">
+        <div className="md:hidden bg-white fixed inset-0 z-[100] animate-menu-in">
           <div className="p-6 flex justify-between items-center border-b border-sand/10">
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 w-auto" />
-            <button onClick={() => setIsOpen(false)} className="text-slate p-2"><X size={32} /></button>
+            <button onClick={closeMenu} className="text-slate p-2 active:scale-90 transition-transform"><X size={32} /></button>
           </div>
-          <div className="px-8 pt-10 flex flex-col space-y-6 h-[calc(100vh-140px)] justify-center">
-            {navLinks.map((link) => (
+          <div className="px-8 pt-6 flex flex-col space-y-6 h-[calc(100vh-140px)] justify-center">
+            {navLinks.map((link, idx) => (
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`text-3xl tracking-tight font-serif font-bold transition-colors ${
+                onClick={closeMenu}
+                style={{ animationDelay: `${idx * 50}ms` }}
+                className={`text-3xl tracking-tight font-serif font-bold transition-colors animate-slide-up ${
                   location.pathname === link.path ? 'text-terracotta' : 'text-slate'
                 }`}
               >
@@ -120,13 +133,14 @@ const Navbar = () => {
             ))}
             <Link
               to="/booking"
-              onClick={() => setIsOpen(false)}
-              className="w-full bg-terracotta text-white text-center py-5 font-accent text-xs tracking-widest uppercase font-black shadow-xl mt-4"
+              onClick={closeMenu}
+              className="w-full bg-terracotta text-white text-center py-5 font-accent text-xs tracking-widest uppercase font-black shadow-xl mt-4 animate-slide-up"
+              style={{ animationDelay: '350ms' }}
             >
               Book Now
             </Link>
             
-            <div className="pt-8 flex justify-center space-x-6 border-t border-sand/20">
+            <div className="pt-8 flex justify-center space-x-6 border-t border-sand/20 animate-fade-in" style={{ animationDelay: '450ms' }}>
               <a href="https://www.instagram.com/tidehotelsandresorts" className="text-slate/40 hover:text-terracotta transition-colors"><Instagram size={24}/></a>
               <a href="https://web.facebook.com/people/Tidé-Hotelsandresorts" className="text-slate/40 hover:text-terracotta transition-colors"><Facebook size={24}/></a>
               <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="text-slate/40 hover:text-terracotta transition-colors"><MessageCircle size={24}/></a>
