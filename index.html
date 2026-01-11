@@ -27,13 +27,23 @@
               accent: ['Tenor Sans', 'sans-serif'],
             },
             animation: {
-              'fade-in': 'fadeIn 0.3s ease-out forwards',
+              'fade-in': 'fadeIn 0.4s ease-out forwards',
+              'slide-up': 'slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'menu-in': 'menuIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards',
               'slow-zoom': 'slowZoom 20s infinite alternate',
             },
             keyframes: {
               fadeIn: {
                 '0%': { opacity: '0' },
                 '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(15px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              menuIn: {
+                '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
               },
               slowZoom: {
                 '0%': { transform: 'scale(1)' },
@@ -48,7 +58,7 @@
       html {
         scroll-behavior: smooth;
         height: -webkit-fill-available;
-        touch-action: manipulation;
+        touch-action: manipulation; /* Removes 300ms click delay on some mobile browsers */
       }
       body {
         font-family: 'Inter', sans-serif;
@@ -74,6 +84,8 @@
 
       h1, h2, h3, h4, .font-serif {
         font-family: 'Cormorant Garamond', serif;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
         font-weight: 600;
         letter-spacing: -0.01em;
       }
@@ -88,6 +100,12 @@
       h2 {
         font-size: clamp(1.85rem, 5vw, 4rem);
         line-height: 1.1;
+        margin-bottom: 1.25rem;
+      }
+
+      h3 {
+        font-size: clamp(1.4rem, 3vw, 2.25rem);
+        line-height: 1.2;
       }
 
       .font-accent {
@@ -99,13 +117,13 @@
       .reveal-on-scroll {
         opacity: 0;
         will-change: transform, opacity;
-        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
       }
       
-      .sr-up { transform: translateY(30px); }
-      .sr-down { transform: translateY(-30px); }
-      .sr-left { transform: translateX(30px); }
-      .sr-right { transform: translateX(-30px); }
+      .sr-up { transform: translateY(40px); }
+      .sr-down { transform: translateY(-40px); }
+      .sr-left { transform: translateX(40px); }
+      .sr-right { transform: translateX(-40px); }
 
       .reveal-on-scroll.is-visible {
         opacity: 1;
@@ -113,14 +131,24 @@
       }
       
       a, button {
-        transition: all 0.2s ease;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #F7F2DD; }
+      ::-webkit-scrollbar-thumb { background: #8C4411; }
+      
       .text-shadow-premium {
-        text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        text-shadow: 0 4px 20px rgba(0,0,0,0.4);
       }
 
       .leaflet-container { font-family: 'Inter', sans-serif; background: #F7F2DD; }
+
+      @supports(padding: max(0px)) {
+        .pb-safe {
+          padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+        }
+      }
     </style>
   <script type="importmap">
 {
@@ -144,12 +172,17 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('is-visible');
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
         document.querySelectorAll('.reveal-on-scroll').forEach(t => observer.observe(t));
         return observer;
       };
+
       let revealObserver = setupRevealObserver();
+      new MutationObserver(() => {
+        revealObserver.disconnect();
+        revealObserver = setupRevealObserver();
+      }).observe(document.body, { childList: true, subtree: true });
     </script>
   </body>
 </html>
