@@ -2,7 +2,7 @@
 import React from 'react';
 import { Download, Users, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ROOMS } from '../constants';
+import { ROOMS } from '../constants.tsx';
 
 const Rooms: React.FC = () => {
   return (

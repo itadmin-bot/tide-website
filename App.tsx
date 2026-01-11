@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, Linkedin, Facebook, MessageCircle, Phone, MapPin, Mail, Lock } from 'lucide-react';
-import Home from './pages/Home';
-import About from './pages/About';
-import Rooms from './pages/Rooms';
-import Amenities from './pages/Amenities';
-import Dining from './pages/Dining';
-import Contact from './pages/Contact';
-import StaffPortal from './pages/StaffPortal';
-import Booking from './pages/Booking';
-import { LOGO_URL } from './constants';
+import Home from './pages/Home.tsx';
+import About from './pages/About.tsx';
+import Rooms from './pages/Rooms.tsx';
+import Amenities from './pages/Amenities.tsx';
+import Dining from './pages/Dining.tsx';
+import Contact from './pages/Contact.tsx';
+import StaffPortal from './pages/StaffPortal.tsx';
+import Booking from './pages/Booking.tsx';
+import { LOGO_URL } from './constants.tsx';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -95,7 +95,7 @@ const Navbar = () => {
 
       {isOpen && (
         <div className="md:hidden bg-white fixed inset-0 z-50 animate-in fade-in duration-300 overflow-hidden">
-          <div className="p-6 flex justify-between items-center border-b border-sand/20">
+          <div className="p-6 flex justify-between items-center border-sand/20">
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-10 w-auto" />
             <button onClick={() => setIsOpen(false)} className="text-slate p-2"><X size={32} /></button>
           </div>

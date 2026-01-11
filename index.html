@@ -180,6 +180,8 @@
 </head>
   <body>
     <div id="root"></div>
+    <!-- Explicitly import the index.tsx entry point as a module -->
+    <script type="module" src="index.tsx"></script>
     <script>
       const setupRevealObserver = () => {
         const observer = new IntersectionObserver((entries) => {

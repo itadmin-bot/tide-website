@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Room, StaffLink, Testimonial } from './types';
+import { Room, StaffLink, Testimonial } from './types.ts';
 
 export const LOGO_URL = "https://i.ibb.co/7JvXPb0d/Artboard-1-copy-5-1.png";
 
