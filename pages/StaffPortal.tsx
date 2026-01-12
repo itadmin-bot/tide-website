@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Lock, FileText, BarChart3, Settings, Users, LogOut, ExternalLink, Printer, ClipboardCheck, MessageSquare, History, Download, Search, Filter, X } from 'lucide-react';
+import { Lock, FileText, BarChart3, Settings, Users, LogOut, ExternalLink, Printer, ClipboardCheck, MessageSquare, History, Download, Search, Filter, X, MonitorSmartphone, Send, AlertCircle, Eye, Clock, Hash, Tag } from 'lucide-react';
 import { STAFF_LINKS, TEAM_STRUCTURE } from '../constants.tsx';
 
 const VALID_PASSWORDS = [
@@ -14,6 +14,17 @@ const VALID_PASSWORDS = [
   'zenza',
   'culinary'
 ];
+
+// Helper to map password-based activeTeam to display team names
+const getTeamDisplay = (id: string) => {
+  if (id === 'maintenance') return 'Facility & work';
+  if (id === 'operations') return 'Tidé Hotels & Resorts';
+  if (id === 'poc') return 'People Operation and Culture';
+  return id.charAt(0).toUpperCase() + id.slice(1);
+};
+
+// Helper to normalize strings for comparison (remove spaces, symbols)
+const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 interface ActivityLog {
   id: string;
@@ -30,6 +41,17 @@ const StaffPortal: React.FC = () => {
   const [error, setError] = useState('');
   const [logs, setLogs] = useState<ActivityLog[]>([]);
   
+  // IT Support Modal State
+  const [isITModalOpen, setIsITModalOpen] = useState(false);
+  const [itRequest, setItRequest] = useState({
+    category: 'Network/Wi-Fi',
+    urgency: 'Medium',
+    description: ''
+  });
+
+  // Log Detail Modal State
+  const [selectedLog, setSelectedLog] = useState<ActivityLog | null>(null);
+
   // Search and Filter State
   const [searchQuery, setSearchQuery] = useState('');
   const [filterTeam, setFilterTeam] = useState('All Teams');
@@ -61,7 +83,7 @@ const StaffPortal: React.FC = () => {
         log.team.toLowerCase().includes(searchQuery.toLowerCase()) ||
         log.timestamp.toLowerCase().includes(searchQuery.toLowerCase());
       
-      const matchesTeam = filterTeam === 'All Teams' || log.team.toLowerCase() === filterTeam.toLowerCase().replace(/\s/g, '');
+      const matchesTeam = filterTeam === 'All Teams' || normalize(log.team) === normalize(filterTeam);
       
       const matchesAction = filterAction === 'All Actions' || log.action === filterAction;
 
@@ -76,13 +98,13 @@ const StaffPortal: React.FC = () => {
 
   const addLog = (action: string, details: string, teamOverride?: string) => {
     const newLog: ActivityLog = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substr(2, 9).toUpperCase(),
       timestamp: new Date().toLocaleString(),
-      team: teamOverride || activeTeam || 'System',
+      team: teamOverride || getTeamDisplay(activeTeam) || 'System',
       action,
       details
     };
-    setLogs(prev => [newLog, ...prev].slice(0, 500)); // Increased log buffer to 500
+    setLogs(prev => [newLog, ...prev].slice(0, 500));
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -92,10 +114,10 @@ const StaffPortal: React.FC = () => {
       setIsAuthenticated(true);
       setActiveTeam(cleanPass);
       setError('');
-      addLog('Login', 'Accessed portal successfully', cleanPass);
+      addLog('Login', 'Accessed portal successfully', getTeamDisplay(cleanPass));
     } else {
       setError('Access denied. Invalid credentials.');
-      addLog('Failed Access', `Attempted login with password attempt length: ${password.length}`, 'Unknown');
+      addLog('Failed Access', `Attempted login attempt with key length: ${password.length}`, 'Unknown');
     }
   };
 
@@ -108,6 +130,40 @@ const StaffPortal: React.FC = () => {
 
   const handleResourceClick = (title: string) => {
     addLog('Resource Access', `Opened: ${title}`);
+  };
+
+  const handleITSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const teamName = getTeamDisplay(activeTeam).toUpperCase();
+    const currentTimestamp = new Date().toLocaleString();
+    
+    // Log the activity immediately in our system
+    addLog('IT Support', `Request Sent: ${itRequest.category} (${itRequest.urgency})`);
+    
+    // Prepare Email Content - Using generic IT support alias for better privacy
+    const recipients = 'itsupport@tidehotelgroup.com';
+    const subject = `IT Support Request [${itRequest.urgency}] - ${teamName}`;
+    const body = `IT SUPPORT REQUEST DETAILS
+--------------------------
+TEAM: ${teamName}
+CATEGORY: ${itRequest.category}
+PRIORITY: ${itRequest.urgency}
+TIME: ${currentTimestamp}
+
+DESCRIPTION:
+${itRequest.description}
+
+--------------------------
+SENT VIA TIDÉ STAFF PORTAL`;
+
+    // Trigger the system email client
+    const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.assign(mailtoLink);
+    
+    // UI Feedback & Reset
+    setItRequest({ category: 'Network/Wi-Fi', urgency: 'Medium', description: '' });
+    setIsITModalOpen(false);
   };
 
   const exportToExcel = () => {
@@ -231,6 +287,24 @@ const StaffPortal: React.FC = () => {
                 </div>
               </a>
             ))}
+            
+            {/* IT Support Request Card */}
+            <button 
+              onClick={() => setIsITModalOpen(true)}
+              className="bg-white p-8 md:p-10 border border-sand/40 shadow-sm hover:shadow-2xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-500 group flex flex-col text-left w-full h-full"
+            >
+              <div className="flex justify-between items-start mb-6 md:mb-8">
+                <div className="bg-ivory p-3 md:p-4 rounded-sm group-hover:bg-slate group-hover:text-white transition-colors">
+                  <MonitorSmartphone size={24} />
+                </div>
+                <AlertCircle size={16} className="text-slate/10 group-hover:text-terracotta transition-colors" />
+              </div>
+              <div className="flex-grow">
+                <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] font-black text-terracotta block mb-2 md:mb-3">Technical</span>
+                <h3 className="text-xl md:text-2xl font-serif mb-3 md:mb-4 group-hover:text-terracotta transition-colors font-bold">IT Support Request</h3>
+                <p className="text-xs text-slate/50 leading-relaxed">Submit hardware, software, or network issues directly to the IT administration team.</p>
+              </div>
+            </button>
           </div>
 
           {/* Enhanced Audit Logs Section */}
@@ -347,15 +421,22 @@ const StaffPortal: React.FC = () => {
                     </tr>
                   ) : (
                     filteredLogs.map((log) => (
-                      <tr key={log.id} className="hover:bg-ivory/30 transition-colors">
+                      <tr 
+                        key={log.id} 
+                        onClick={() => setSelectedLog(log)}
+                        className="hover:bg-ivory/50 transition-colors cursor-pointer group"
+                      >
                         <td className="px-6 py-4 text-slate/50 font-mono text-[10px] whitespace-nowrap">{log.timestamp}</td>
                         <td className="px-6 py-4">
-                          <span className={`px-2 py-0.5 rounded-sm text-[9px] uppercase font-black tracking-widest ${log.team.toLowerCase() === activeTeam ? 'bg-terracotta text-white' : 'bg-slate/5 text-slate/40'}`}>
+                          <span className={`px-2 py-0.5 rounded-sm text-[9px] uppercase font-black tracking-widest ${normalize(log.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta text-white' : 'bg-slate/5 text-slate/40'}`}>
                             {log.team}
                           </span>
                         </td>
                         <td className="px-6 py-4 font-bold text-slate text-xs">{log.action}</td>
-                        <td className="px-6 py-4 text-slate/60 text-xs italic">{log.details}</td>
+                        <td className="px-6 py-4 text-slate/60 text-xs italic flex justify-between items-center">
+                          <span className="truncate max-w-[200px]">{log.details}</span>
+                          <Eye size={12} className="opacity-0 group-hover:opacity-100 text-terracotta transition-opacity shrink-0 ml-2" />
+                        </td>
                       </tr>
                     ))
                   )}
@@ -371,12 +452,12 @@ const StaffPortal: React.FC = () => {
           <div className="bg-slate text-white p-8 md:p-10 rounded-sm shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-terracotta opacity-10 rounded-full -mr-16 -mt-16"></div>
             <h3 className="text-xl md:text-2xl font-serif mb-6 md:mb-8 flex items-center space-x-4 relative z-10 font-bold">
-              <Users size={24} className="text-terracotta" />
+              <span className="bg-terracotta p-1 rounded-sm"><Users size={24} className="text-white" /></span>
               <span>Team Directory</span>
             </h3>
             <div className="space-y-4 md:space-y-5 relative z-10">
               {TEAM_STRUCTURE.map((dept) => {
-                const isDeptActive = dept.toLowerCase().replace(/\s/g, '') === activeTeam;
+                const isDeptActive = normalize(dept) === normalize(getTeamDisplay(activeTeam));
                 return (
                   <div key={dept} className={`flex justify-between items-center py-2.5 md:py-3 border-b border-white/5 last:border-0 px-2 transition-colors rounded-sm ${isDeptActive ? 'bg-white/10' : 'hover:bg-white/5'}`}>
                     <span className={`text-xs tracking-wide ${isDeptActive ? 'font-bold text-white' : 'font-light text-pearl/80'}`}>{dept}</span>
@@ -415,6 +496,166 @@ const StaffPortal: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* IT Support Modal */}
+      {isITModalOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-slate/90 backdrop-blur-md" onClick={() => setIsITModalOpen(false)}></div>
+          <div className="bg-white w-full max-w-xl rounded-sm shadow-2xl relative z-10 overflow-hidden animate-menu-in">
+            <div className="bg-terracotta p-6 md:p-8 text-white flex justify-between items-center">
+              <div className="flex items-center space-x-4">
+                <MonitorSmartphone size={28} />
+                <h3 className="text-2xl font-serif font-bold">IT Support Request</h3>
+              </div>
+              <button onClick={() => setIsITModalOpen(false)} className="hover:rotate-90 transition-transform">
+                <X size={24} />
+              </button>
+            </div>
+            
+            <form onSubmit={handleITSubmit} className="p-8 md:p-10 space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Team/Department</label>
+                  <input 
+                    type="text" 
+                    value={getTeamDisplay(activeTeam).toUpperCase()} 
+                    disabled 
+                    className="w-full bg-pearl/50 border border-sand/40 rounded-sm px-4 py-3 text-xs font-bold text-slate/50 cursor-not-allowed"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Issue Category</label>
+                  <select 
+                    value={itRequest.category}
+                    onChange={(e) => setItRequest({...itRequest, category: e.target.value})}
+                    className="w-full bg-white border border-sand/40 rounded-sm px-4 py-3 text-xs outline-none focus:border-terracotta transition-all appearance-none"
+                  >
+                    <option>Network/Wi-Fi</option>
+                    <option>Hardware (PC/Printer)</option>
+                    <option>Software/Portal Access</option>
+                    <option>Email/Communication</option>
+                    <option>Security/CCTV</option>
+                    <option>Other Technical Issue</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Priority Level</label>
+                <div className="flex gap-4">
+                  {['Low', 'Medium', 'High'].map(level => (
+                    <button 
+                      key={level}
+                      type="button"
+                      onClick={() => setItRequest({...itRequest, urgency: level})}
+                      className={`flex-1 py-3 text-[10px] uppercase tracking-widest font-black rounded-sm border transition-all ${
+                        itRequest.urgency === level 
+                        ? 'bg-slate text-white border-slate' 
+                        : 'bg-pearl/30 border-sand text-slate/40 hover:border-terracotta'
+                      }`}
+                    >
+                      {level}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Description of Issue</label>
+                <textarea 
+                  required
+                  rows={4}
+                  value={itRequest.description}
+                  onChange={(e) => setItRequest({...itRequest, description: e.target.value})}
+                  placeholder="Please describe the issue in detail..."
+                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-3 text-xs outline-none focus:border-terracotta transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <div className="pt-4">
+                <button 
+                  type="submit"
+                  className="w-full bg-terracotta text-white py-5 uppercase tracking-widest text-[10px] font-black hover:bg-slate transition-all shadow-xl flex items-center justify-center space-x-3"
+                >
+                  <Send size={16} />
+                  <span>Send Request to IT Support</span>
+                </button>
+                <p className="text-center mt-6 text-[8px] text-slate/30 uppercase tracking-widest">
+                  This request will be logged and emailed to IT administration.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Log Detail Modal */}
+      {selectedLog && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-slate/90 backdrop-blur-md" onClick={() => setSelectedLog(null)}></div>
+          <div className="bg-white w-full max-w-lg rounded-sm shadow-2xl relative z-10 overflow-hidden animate-menu-in">
+            <div className="bg-slate p-6 md:p-8 text-white flex justify-between items-center border-b border-terracotta">
+              <div className="flex items-center space-x-4">
+                <History size={24} className="text-terracotta" />
+                <h3 className="text-xl md:text-2xl font-serif font-bold">Log Details</h3>
+              </div>
+              <button onClick={() => setSelectedLog(null)} className="hover:rotate-90 transition-transform">
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="p-8 md:p-10 space-y-8">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                    <Hash size={10} /> Reference ID
+                  </label>
+                  <p className="text-xs font-mono font-bold text-slate bg-pearl/50 p-2 rounded-sm border border-sand/20">#{selectedLog.id}</p>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                    <Clock size={10} /> Timestamp
+                  </label>
+                  <p className="text-xs font-bold text-slate p-2">{selectedLog.timestamp}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                    <Users size={10} /> Team Entity
+                  </label>
+                  <span className={`inline-block px-3 py-1 rounded-sm text-[10px] uppercase font-black tracking-widest ${normalize(selectedLog.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta text-white' : 'bg-slate/10 text-slate/60'}`}>
+                    {selectedLog.team}
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                    <Tag size={10} /> Event Action
+                  </label>
+                  <p className="text-xs font-black text-slate p-2">{selectedLog.action}</p>
+                </div>
+              </div>
+
+              <div className="space-y-3 pt-4 border-t border-sand/20">
+                <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Extended Narrative / Payload</label>
+                <div className="bg-ivory/50 p-6 rounded-sm border border-sand/30 min-h-[120px]">
+                  <p className="text-sm text-slate leading-relaxed font-serif italic">"{selectedLog.details}"</p>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <button 
+                  onClick={() => setSelectedLog(null)}
+                  className="w-full bg-slate text-white py-4 uppercase tracking-widest text-[10px] font-black hover:bg-terracotta transition-all shadow-lg"
+                >
+                  Return to Dashboard
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

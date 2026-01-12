@@ -65,7 +65,7 @@ export const STAFF_LINKS: StaffLink[] = [
     title: "Daily Activities Report",
     description: "Submit daily tasks and activities by 5pm. Required for all teams.",
     url: "https://form.jotform.com/253231945252050",
-    category: "Operations"
+    category: "Tidé Hotels & Resorts"
   },
   {
     title: "Sales Call Log",
@@ -77,13 +77,13 @@ export const STAFF_LINKS: StaffLink[] = [
     title: "Facility Maintenance Report",
     description: "End-of-day daily maintenance check and quantifiable report submission.",
     url: "https://form.jotform.com/253283825156057",
-    category: "Maintenance"
+    category: "Facility & work"
   },
   {
     title: "Performance Tracker",
     description: "Official platform for task management, deadlines, and performance monitoring.",
     url: "https://1drv.ms/x/c/8F3991BADB578001/IQD_0q8oO2OoQLRUVvBKw_BIAQvTxon4ZI3WXDOB4aARh8U?e=64vd3P",
-    category: "HR"
+    category: "People operation and culture"
   },
   {
     title: "Sales Booking & Tracking",
@@ -95,7 +95,7 @@ export const STAFF_LINKS: StaffLink[] = [
     title: "Printer App",
     description: "Receipt & Reservation Printer App (Requires separate password).",
     url: "https://tide-hotels-and-resorts.vercel.app/",
-    category: "Operations"
+    category: "App"
   },
   {
     title: "Guest Feedback Form",
@@ -108,9 +108,9 @@ export const STAFF_LINKS: StaffLink[] = [
 export const TEAM_STRUCTURE = [
   "Guest Relations",
   "IT",
-  "POC",
-  "Maintenance",
-  "Operations",
+  "People Operation and Culture",
+  "Facility & work",
+  "Tidé Hotels & Resorts",
   "Store",
   "Whispers",
   "Zenza",
