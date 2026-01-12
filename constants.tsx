@@ -106,11 +106,12 @@ export const STAFF_LINKS: StaffLink[] = [
 ];
 
 export const TEAM_STRUCTURE = [
-  "Housekeeping",
+  "Guest Relations",
   "IT",
   "POC",
-  "Guest Relations",
   "Maintenance",
+  "Operations",
+  "Store",
   "Whispers",
   "Zenza",
   "Culinary"

@@ -1,13 +1,15 @@
+
 import React, { useState } from 'react';
 import { Lock, FileText, BarChart3, Settings, Users, LogOut, ExternalLink, Printer, ClipboardCheck, MessageSquare } from 'lucide-react';
 import { STAFF_LINKS, TEAM_STRUCTURE } from '../constants.tsx';
 
 const VALID_PASSWORDS = [
-  'housekeeping',
+  'guestrelations',
   'it',
   'poc',
-  'guest relations',
   'maintenance',
+  'operations',
+  'store',
   'whispers',
   'zenza',
   'culinary'
