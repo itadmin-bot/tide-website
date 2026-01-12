@@ -309,36 +309,38 @@ SENT VIA TIDÉ STAFF PORTAL`;
 
           {/* Enhanced Audit Logs Section */}
           <div className="bg-white border border-sand/40 shadow-sm rounded-sm overflow-hidden flex flex-col">
-            <div className="p-6 md:p-8 bg-slate text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="p-5 md:p-8 bg-slate text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6">
               <div className="flex items-center space-x-4">
-                <History size={24} className="text-terracotta" />
+                <div className="bg-white/10 p-2 md:p-3 rounded-sm shrink-0">
+                  <History size={20} className="text-terracotta" />
+                </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-serif font-bold">System Audit Logs</h3>
-                  <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-pearl/40 font-black">Historical Activity Tracking</p>
+                  <h3 className="text-xl md:text-2xl font-serif font-bold leading-tight">System Audit Logs</h3>
+                  <p className="text-[7px] md:text-[10px] uppercase tracking-widest text-pearl/40 font-black">Historical Activity Tracking</p>
                 </div>
               </div>
               <button 
                 onClick={exportToExcel}
-                className="flex items-center space-x-2 bg-white/10 hover:bg-terracotta transition-colors px-4 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest w-full md:w-auto justify-center"
+                className="flex items-center justify-center space-x-2 bg-white/10 hover:bg-terracotta transition-all px-4 py-3 md:py-2.5 rounded-sm text-[8px] md:text-[9px] font-black uppercase tracking-widest w-full md:w-auto shadow-sm"
               >
                 <Download size={14} />
-                <span>Export Filtered (CSV)</span>
+                <span>Export CSV</span>
               </button>
             </div>
 
             {/* Filter Toolbar */}
-            <div className="p-4 md:p-6 bg-ivory/30 border-b border-sand/20 grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div className="p-4 md:p-6 bg-ivory/30 border-b border-sand/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
               <div className="space-y-2">
-                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
-                  <Search size={10} /> Search Logs
+                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2 pl-1">
+                  <Search size={10} /> Search Keywords
                 </label>
                 <div className="relative">
                   <input 
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Team, action or date..."
-                    className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-xs outline-none focus:border-terracotta transition-all"
+                    placeholder="Ref ID, Action, Detail..."
+                    className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-[11px] md:text-xs outline-none focus:border-terracotta transition-all shadow-sm"
                   />
                   {searchQuery && (
                     <button onClick={() => setSearchQuery('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate/30 hover:text-terracotta">
@@ -349,13 +351,13 @@ SENT VIA TIDÉ STAFF PORTAL`;
               </div>
 
               <div className="space-y-2">
-                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
-                  <Filter size={10} /> Team
+                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2 pl-1">
+                  <Filter size={10} /> Team Entity
                 </label>
                 <select 
                   value={filterTeam}
                   onChange={(e) => setFilterTeam(e.target.value)}
-                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-xs outline-none focus:border-terracotta transition-all appearance-none"
+                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-[11px] md:text-xs outline-none focus:border-terracotta transition-all appearance-none shadow-sm cursor-pointer"
                 >
                   <option>All Teams</option>
                   {TEAM_STRUCTURE.map(team => <option key={team}>{team}</option>)}
@@ -365,13 +367,13 @@ SENT VIA TIDÉ STAFF PORTAL`;
               </div>
 
               <div className="space-y-2">
-                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
-                  <Filter size={10} /> Action
+                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2 pl-1">
+                  <Tag size={10} /> Event Action
                 </label>
                 <select 
                   value={filterAction}
                   onChange={(e) => setFilterAction(e.target.value)}
-                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-xs outline-none focus:border-terracotta transition-all appearance-none"
+                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-[11px] md:text-xs outline-none focus:border-terracotta transition-all appearance-none shadow-sm cursor-pointer"
                 >
                   <option>All Actions</option>
                   {uniqueActions.map(action => <option key={action}>{action}</option>)}
@@ -381,41 +383,41 @@ SENT VIA TIDÉ STAFF PORTAL`;
               <button 
                 onClick={resetFilters}
                 disabled={!searchQuery && filterTeam === 'All Teams' && filterAction === 'All Actions'}
-                className="bg-pearl text-slate px-4 py-2.5 rounded-sm text-[8px] font-black uppercase tracking-widest hover:bg-sand/30 transition-all disabled:opacity-30 flex items-center justify-center gap-2 h-[38px]"
+                className="bg-pearl text-slate px-4 py-2.5 rounded-sm text-[8px] font-black uppercase tracking-widest hover:bg-sand/30 transition-all disabled:opacity-30 flex items-center justify-center gap-2 h-[36px] md:h-[38px] shadow-sm active:scale-95"
               >
-                <X size={12} /> Reset
+                <X size={12} /> Reset Filters
               </button>
             </div>
 
             {/* Results Counter */}
-            <div className="px-6 py-3 bg-white border-b border-sand/10 flex justify-between items-center">
-              <span className="text-[8px] uppercase tracking-widest font-black text-slate/30">
-                Displaying {filteredLogs.length} of {logs.length} results
+            <div className="px-5 md:px-6 py-2.5 bg-white border-b border-sand/10 flex justify-between items-center">
+              <span className="text-[7px] md:text-[8px] uppercase tracking-widest font-black text-slate/30">
+                Viewing {filteredLogs.length} matching events
               </span>
               {(searchQuery || filterTeam !== 'All Teams' || filterAction !== 'All Actions') && (
-                <span className="text-[8px] uppercase tracking-widest font-black text-terracotta animate-pulse">
-                  Filters Active
+                <span className="text-[7px] md:text-[8px] uppercase tracking-widest font-black text-terracotta bg-terracotta/5 px-2 py-0.5 rounded-sm">
+                  Refined Search
                 </span>
               )}
             </div>
 
-            <div className="overflow-x-auto max-h-[500px]">
-              <table className="w-full text-left text-sm">
-                <thead className="sticky top-0 bg-ivory text-slate font-accent text-[9px] uppercase tracking-widest font-black border-b border-sand/20 z-10">
+            <div className="overflow-x-auto scrollbar-thin">
+              <table className="w-full text-left text-sm min-w-[650px] lg:min-w-full border-collapse">
+                <thead className="sticky top-0 bg-ivory text-slate font-accent text-[8px] md:text-[9px] uppercase tracking-widest font-black border-b border-sand/20 z-10">
                   <tr>
-                    <th className="px-6 py-4">Timestamp</th>
-                    <th className="px-6 py-4">Team</th>
-                    <th className="px-6 py-4">Action</th>
-                    <th className="px-6 py-4">Details</th>
+                    <th className="px-4 md:px-6 py-4">Timestamp</th>
+                    <th className="px-4 md:px-6 py-4">Team</th>
+                    <th className="px-4 md:px-6 py-4">Action</th>
+                    <th className="px-4 md:px-6 py-4">Details</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-sand/10">
+                <tbody className="divide-y divide-sand/10 bg-white">
                   {filteredLogs.length === 0 ? (
                     <tr>
                       <td colSpan={4} className="px-6 py-16 text-center">
-                        <div className="flex flex-col items-center space-y-4 opacity-20">
-                          <Search size={48} strokeWidth={1} />
-                          <p className="italic font-serif text-lg">No entries match your current filters.</p>
+                        <div className="flex flex-col items-center space-y-4 opacity-10">
+                          <Search size={40} md:size={48} strokeWidth={1} />
+                          <p className="italic font-serif text-base md:text-lg">No audit entries found</p>
                         </div>
                       </td>
                     </tr>
@@ -424,18 +426,18 @@ SENT VIA TIDÉ STAFF PORTAL`;
                       <tr 
                         key={log.id} 
                         onClick={() => setSelectedLog(log)}
-                        className="hover:bg-ivory/50 transition-colors cursor-pointer group"
+                        className="hover:bg-ivory/30 transition-colors cursor-pointer group active:bg-pearl"
                       >
-                        <td className="px-6 py-4 text-slate/50 font-mono text-[10px] whitespace-nowrap">{log.timestamp}</td>
-                        <td className="px-6 py-4">
-                          <span className={`px-2 py-0.5 rounded-sm text-[9px] uppercase font-black tracking-widest ${normalize(log.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta text-white' : 'bg-slate/5 text-slate/40'}`}>
+                        <td className="px-4 md:px-6 py-4 text-slate/50 font-mono text-[9px] md:text-[10px] whitespace-nowrap">{log.timestamp}</td>
+                        <td className="px-4 md:px-6 py-4">
+                          <span className={`px-2 py-0.5 rounded-sm text-[8px] md:text-[9px] uppercase font-black tracking-widest inline-block ${normalize(log.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta text-white' : 'bg-slate/5 text-slate/40'}`}>
                             {log.team}
                           </span>
                         </td>
-                        <td className="px-6 py-4 font-bold text-slate text-xs">{log.action}</td>
-                        <td className="px-6 py-4 text-slate/60 text-xs italic flex justify-between items-center">
-                          <span className="truncate max-w-[200px]">{log.details}</span>
-                          <Eye size={12} className="opacity-0 group-hover:opacity-100 text-terracotta transition-opacity shrink-0 ml-2" />
+                        <td className="px-4 md:px-6 py-4 font-bold text-slate text-[11px] md:text-xs whitespace-nowrap">{log.action}</td>
+                        <td className="px-4 md:px-6 py-4 text-slate/60 text-[11px] md:text-xs italic flex justify-between items-center gap-2">
+                          <span className="truncate max-w-[150px] md:max-w-[250px]">{log.details}</span>
+                          <Eye size={12} className="opacity-0 group-hover:opacity-100 text-terracotta transition-all shrink-0" />
                         </td>
                       </tr>
                     ))
@@ -499,21 +501,21 @@ SENT VIA TIDÉ STAFF PORTAL`;
 
       {/* IT Support Modal */}
       {isITModalOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center px-6">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
           <div className="absolute inset-0 bg-slate/90 backdrop-blur-md" onClick={() => setIsITModalOpen(false)}></div>
           <div className="bg-white w-full max-w-xl rounded-sm shadow-2xl relative z-10 overflow-hidden animate-menu-in">
             <div className="bg-terracotta p-6 md:p-8 text-white flex justify-between items-center">
               <div className="flex items-center space-x-4">
-                <MonitorSmartphone size={28} />
-                <h3 className="text-2xl font-serif font-bold">IT Support Request</h3>
+                <MonitorSmartphone size={24} md:size={28} />
+                <h3 className="text-xl md:text-2xl font-serif font-bold">IT Support Request</h3>
               </div>
-              <button onClick={() => setIsITModalOpen(false)} className="hover:rotate-90 transition-transform">
+              <button onClick={() => setIsITModalOpen(false)} className="hover:rotate-90 transition-transform p-1">
                 <X size={24} />
               </button>
             </div>
             
-            <form onSubmit={handleITSubmit} className="p-8 md:p-10 space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form onSubmit={handleITSubmit} className="p-6 md:p-10 space-y-6 md:space-y-8 max-h-[80vh] overflow-y-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 <div className="space-y-2">
                   <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Team/Department</label>
                   <input 
@@ -528,7 +530,7 @@ SENT VIA TIDÉ STAFF PORTAL`;
                   <select 
                     value={itRequest.category}
                     onChange={(e) => setItRequest({...itRequest, category: e.target.value})}
-                    className="w-full bg-white border border-sand/40 rounded-sm px-4 py-3 text-xs outline-none focus:border-terracotta transition-all appearance-none"
+                    className="w-full bg-white border border-sand/40 rounded-sm px-4 py-3 text-xs outline-none focus:border-terracotta transition-all appearance-none shadow-sm"
                   >
                     <option>Network/Wi-Fi</option>
                     <option>Hardware (PC/Printer)</option>
@@ -542,13 +544,13 @@ SENT VIA TIDÉ STAFF PORTAL`;
 
               <div className="space-y-2">
                 <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Priority Level</label>
-                <div className="flex gap-4">
+                <div className="flex gap-2 md:gap-4">
                   {['Low', 'Medium', 'High'].map(level => (
                     <button 
                       key={level}
                       type="button"
                       onClick={() => setItRequest({...itRequest, urgency: level})}
-                      className={`flex-1 py-3 text-[10px] uppercase tracking-widest font-black rounded-sm border transition-all ${
+                      className={`flex-1 py-3 text-[9px] md:text-[10px] uppercase tracking-widest font-black rounded-sm border transition-all shadow-sm ${
                         itRequest.urgency === level 
                         ? 'bg-slate text-white border-slate' 
                         : 'bg-pearl/30 border-sand text-slate/40 hover:border-terracotta'
@@ -568,20 +570,20 @@ SENT VIA TIDÉ STAFF PORTAL`;
                   value={itRequest.description}
                   onChange={(e) => setItRequest({...itRequest, description: e.target.value})}
                   placeholder="Please describe the issue in detail..."
-                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-3 text-xs outline-none focus:border-terracotta transition-all resize-none"
+                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-3 text-xs outline-none focus:border-terracotta transition-all resize-none shadow-sm"
                 ></textarea>
               </div>
 
               <div className="pt-4">
                 <button 
                   type="submit"
-                  className="w-full bg-terracotta text-white py-5 uppercase tracking-widest text-[10px] font-black hover:bg-slate transition-all shadow-xl flex items-center justify-center space-x-3"
+                  className="w-full bg-terracotta text-white py-4 md:py-5 uppercase tracking-widest text-[10px] font-black hover:bg-slate transition-all shadow-xl flex items-center justify-center space-x-3 active:scale-95"
                 >
                   <Send size={16} />
-                  <span>Send Request to IT Support</span>
+                  <span>Send IT Request</span>
                 </button>
                 <p className="text-center mt-6 text-[8px] text-slate/30 uppercase tracking-widest">
-                  This request will be logged and emailed to IT administration.
+                  System draft will launch in your primary mail client.
                 </p>
               </div>
             </form>
@@ -591,7 +593,7 @@ SENT VIA TIDÉ STAFF PORTAL`;
 
       {/* Log Detail Modal */}
       {selectedLog && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center px-6">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
           <div className="absolute inset-0 bg-slate/90 backdrop-blur-md" onClick={() => setSelectedLog(null)}></div>
           <div className="bg-white w-full max-w-lg rounded-sm shadow-2xl relative z-10 overflow-hidden animate-menu-in">
             <div className="bg-slate p-6 md:p-8 text-white flex justify-between items-center border-b border-terracotta">
@@ -599,55 +601,57 @@ SENT VIA TIDÉ STAFF PORTAL`;
                 <History size={24} className="text-terracotta" />
                 <h3 className="text-xl md:text-2xl font-serif font-bold">Log Details</h3>
               </div>
-              <button onClick={() => setSelectedLog(null)} className="hover:rotate-90 transition-transform">
+              <button onClick={() => setSelectedLog(null)} className="hover:rotate-90 transition-transform p-1">
                 <X size={24} />
               </button>
             </div>
             
-            <div className="p-8 md:p-10 space-y-8">
-              <div className="grid grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+            <div className="p-6 md:p-10 space-y-6 md:space-y-8">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-1">
+                  <label className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
                     <Hash size={10} /> Reference ID
                   </label>
-                  <p className="text-xs font-mono font-bold text-slate bg-pearl/50 p-2 rounded-sm border border-sand/20">#{selectedLog.id}</p>
+                  <p className="text-[11px] md:text-xs font-mono font-bold text-slate bg-pearl/50 p-2 rounded-sm border border-sand/20">#{selectedLog.id}</p>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                <div className="space-y-1">
+                  <label className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
                     <Clock size={10} /> Timestamp
                   </label>
-                  <p className="text-xs font-bold text-slate p-2">{selectedLog.timestamp}</p>
+                  <p className="text-[11px] md:text-xs font-bold text-slate p-2">{selectedLog.timestamp}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-1">
+                  <label className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
                     <Users size={10} /> Team Entity
                   </label>
-                  <span className={`inline-block px-3 py-1 rounded-sm text-[10px] uppercase font-black tracking-widest ${normalize(selectedLog.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta text-white' : 'bg-slate/10 text-slate/60'}`}>
-                    {selectedLog.team}
-                  </span>
+                  <div className="p-1">
+                    <span className={`inline-block px-3 py-1 rounded-sm text-[9px] md:text-[10px] uppercase font-black tracking-widest ${normalize(selectedLog.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta text-white' : 'bg-slate/10 text-slate/60'}`}>
+                      {selectedLog.team}
+                    </span>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                <div className="space-y-1">
+                  <label className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
                     <Tag size={10} /> Event Action
                   </label>
-                  <p className="text-xs font-black text-slate p-2">{selectedLog.action}</p>
+                  <p className="text-[11px] md:text-xs font-black text-slate p-2">{selectedLog.action}</p>
                 </div>
               </div>
 
               <div className="space-y-3 pt-4 border-t border-sand/20">
-                <label className="text-[9px] uppercase tracking-widest font-black text-slate/40">Extended Narrative / Payload</label>
-                <div className="bg-ivory/50 p-6 rounded-sm border border-sand/30 min-h-[120px]">
-                  <p className="text-sm text-slate leading-relaxed font-serif italic">"{selectedLog.details}"</p>
+                <label className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate/40">Extended Narrative / Payload</label>
+                <div className="bg-ivory/50 p-4 md:p-6 rounded-sm border border-sand/30 min-h-[100px] md:min-h-[120px]">
+                  <p className="text-xs md:text-sm text-slate leading-relaxed font-serif italic">"{selectedLog.details}"</p>
                 </div>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2">
                 <button 
                   onClick={() => setSelectedLog(null)}
-                  className="w-full bg-slate text-white py-4 uppercase tracking-widest text-[10px] font-black hover:bg-terracotta transition-all shadow-lg"
+                  className="w-full bg-slate text-white py-4 uppercase tracking-widest text-[10px] font-black hover:bg-terracotta transition-all shadow-lg active:scale-95"
                 >
                   Return to Dashboard
                 </button>
