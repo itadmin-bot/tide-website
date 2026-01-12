@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Lock, FileText, BarChart3, Settings, Users, LogOut, ExternalLink, Printer, ClipboardCheck, MessageSquare, History, Download } from 'lucide-react';
+import { Lock, FileText, BarChart3, Settings, Users, LogOut, ExternalLink, Printer, ClipboardCheck, MessageSquare, History, Download, Search, Filter, X } from 'lucide-react';
 import { STAFF_LINKS, TEAM_STRUCTURE } from '../constants.tsx';
 
 const VALID_PASSWORDS = [
@@ -29,6 +29,11 @@ const StaffPortal: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [logs, setLogs] = useState<ActivityLog[]>([]);
+  
+  // Search and Filter State
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterTeam, setFilterTeam] = useState('All Teams');
+  const [filterAction, setFilterAction] = useState('All Actions');
 
   // Load logs from localStorage on mount
   useEffect(() => {
@@ -47,6 +52,28 @@ const StaffPortal: React.FC = () => {
     localStorage.setItem('tide_staff_logs', JSON.stringify(logs));
   }, [logs]);
 
+  // Derived filtered logs
+  const filteredLogs = useMemo(() => {
+    return logs.filter(log => {
+      const matchesSearch = 
+        log.details.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.team.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.timestamp.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      const matchesTeam = filterTeam === 'All Teams' || log.team.toLowerCase() === filterTeam.toLowerCase().replace(/\s/g, '');
+      
+      const matchesAction = filterAction === 'All Actions' || log.action === filterAction;
+
+      return matchesSearch && matchesTeam && matchesAction;
+    });
+  }, [logs, searchQuery, filterTeam, filterAction]);
+
+  const uniqueActions = useMemo(() => {
+    const actions = new Set(logs.map(l => l.action));
+    return Array.from(actions);
+  }, [logs]);
+
   const addLog = (action: string, details: string, teamOverride?: string) => {
     const newLog: ActivityLog = {
       id: Math.random().toString(36).substr(2, 9),
@@ -55,7 +82,7 @@ const StaffPortal: React.FC = () => {
       action,
       details
     };
-    setLogs(prev => [newLog, ...prev].slice(0, 100)); // Keep last 100 logs
+    setLogs(prev => [newLog, ...prev].slice(0, 500)); // Increased log buffer to 500
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -68,7 +95,7 @@ const StaffPortal: React.FC = () => {
       addLog('Login', 'Accessed portal successfully', cleanPass);
     } else {
       setError('Access denied. Invalid credentials.');
-      addLog('Failed Access', `Attempted login with: ${password}`, 'Unknown');
+      addLog('Failed Access', `Attempted login with password attempt length: ${password.length}`, 'Unknown');
     }
   };
 
@@ -84,11 +111,11 @@ const StaffPortal: React.FC = () => {
   };
 
   const exportToExcel = () => {
-    addLog('Export', 'Downloaded activity logs CSV');
+    addLog('Export', `Downloaded filtered activity logs CSV (${filteredLogs.length} entries)`);
     const headers = ['ID', 'Timestamp', 'Team', 'Action', 'Details'];
     const csvRows = [
       headers.join(','),
-      ...logs.map(log => [
+      ...filteredLogs.map(log => [
         log.id,
         `"${log.timestamp}"`,
         `"${log.team}"`,
@@ -102,11 +129,17 @@ const StaffPortal: React.FC = () => {
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', `Tide_Staff_Logs_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `Tide_Staff_Logs_Filtered_${new Date().toISOString().split('T')[0]}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const resetFilters = () => {
+    setSearchQuery('');
+    setFilterTeam('All Teams');
+    setFilterAction('All Actions');
   };
 
   const getIcon = (title: string) => {
@@ -200,9 +233,9 @@ const StaffPortal: React.FC = () => {
             ))}
           </div>
 
-          {/* New Audit Logs Section */}
-          <div className="bg-white border border-sand/40 shadow-sm rounded-sm overflow-hidden">
-            <div className="p-6 md:p-8 bg-slate text-white flex justify-between items-center">
+          {/* Enhanced Audit Logs Section */}
+          <div className="bg-white border border-sand/40 shadow-sm rounded-sm overflow-hidden flex flex-col">
+            <div className="p-6 md:p-8 bg-slate text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="flex items-center space-x-4">
                 <History size={24} className="text-terracotta" />
                 <div>
@@ -212,15 +245,89 @@ const StaffPortal: React.FC = () => {
               </div>
               <button 
                 onClick={exportToExcel}
-                className="flex items-center space-x-2 bg-white/10 hover:bg-terracotta transition-colors px-4 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest"
+                className="flex items-center space-x-2 bg-white/10 hover:bg-terracotta transition-colors px-4 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest w-full md:w-auto justify-center"
               >
                 <Download size={14} />
-                <span>Export (CSV)</span>
+                <span>Export Filtered (CSV)</span>
               </button>
             </div>
-            <div className="overflow-x-auto max-h-[400px]">
+
+            {/* Filter Toolbar */}
+            <div className="p-4 md:p-6 bg-ivory/30 border-b border-sand/20 grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+              <div className="space-y-2">
+                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                  <Search size={10} /> Search Logs
+                </label>
+                <div className="relative">
+                  <input 
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Team, action or date..."
+                    className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-xs outline-none focus:border-terracotta transition-all"
+                  />
+                  {searchQuery && (
+                    <button onClick={() => setSearchQuery('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate/30 hover:text-terracotta">
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                  <Filter size={10} /> Team
+                </label>
+                <select 
+                  value={filterTeam}
+                  onChange={(e) => setFilterTeam(e.target.value)}
+                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-xs outline-none focus:border-terracotta transition-all appearance-none"
+                >
+                  <option>All Teams</option>
+                  {TEAM_STRUCTURE.map(team => <option key={team}>{team}</option>)}
+                  <option>System</option>
+                  <option>Unknown</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[8px] uppercase tracking-widest font-black text-slate/40 flex items-center gap-2">
+                  <Filter size={10} /> Action
+                </label>
+                <select 
+                  value={filterAction}
+                  onChange={(e) => setFilterAction(e.target.value)}
+                  className="w-full bg-white border border-sand/40 rounded-sm px-4 py-2 text-xs outline-none focus:border-terracotta transition-all appearance-none"
+                >
+                  <option>All Actions</option>
+                  {uniqueActions.map(action => <option key={action}>{action}</option>)}
+                </select>
+              </div>
+
+              <button 
+                onClick={resetFilters}
+                disabled={!searchQuery && filterTeam === 'All Teams' && filterAction === 'All Actions'}
+                className="bg-pearl text-slate px-4 py-2.5 rounded-sm text-[8px] font-black uppercase tracking-widest hover:bg-sand/30 transition-all disabled:opacity-30 flex items-center justify-center gap-2 h-[38px]"
+              >
+                <X size={12} /> Reset
+              </button>
+            </div>
+
+            {/* Results Counter */}
+            <div className="px-6 py-3 bg-white border-b border-sand/10 flex justify-between items-center">
+              <span className="text-[8px] uppercase tracking-widest font-black text-slate/30">
+                Displaying {filteredLogs.length} of {logs.length} results
+              </span>
+              {(searchQuery || filterTeam !== 'All Teams' || filterAction !== 'All Actions') && (
+                <span className="text-[8px] uppercase tracking-widest font-black text-terracotta animate-pulse">
+                  Filters Active
+                </span>
+              )}
+            </div>
+
+            <div className="overflow-x-auto max-h-[500px]">
               <table className="w-full text-left text-sm">
-                <thead className="sticky top-0 bg-ivory text-slate font-accent text-[9px] uppercase tracking-widest font-black border-b border-sand/20">
+                <thead className="sticky top-0 bg-ivory text-slate font-accent text-[9px] uppercase tracking-widest font-black border-b border-sand/20 z-10">
                   <tr>
                     <th className="px-6 py-4">Timestamp</th>
                     <th className="px-6 py-4">Team</th>
@@ -229,16 +336,21 @@ const StaffPortal: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-sand/10">
-                  {logs.length === 0 ? (
+                  {filteredLogs.length === 0 ? (
                     <tr>
-                      <td colSpan={4} className="px-6 py-12 text-center text-slate/30 italic font-serif">No logs available in current session.</td>
+                      <td colSpan={4} className="px-6 py-16 text-center">
+                        <div className="flex flex-col items-center space-y-4 opacity-20">
+                          <Search size={48} strokeWidth={1} />
+                          <p className="italic font-serif text-lg">No entries match your current filters.</p>
+                        </div>
+                      </td>
                     </tr>
                   ) : (
-                    logs.map((log) => (
+                    filteredLogs.map((log) => (
                       <tr key={log.id} className="hover:bg-ivory/30 transition-colors">
                         <td className="px-6 py-4 text-slate/50 font-mono text-[10px] whitespace-nowrap">{log.timestamp}</td>
                         <td className="px-6 py-4">
-                          <span className={`px-2 py-0.5 rounded-sm text-[9px] uppercase font-black tracking-widest ${log.team === activeTeam ? 'bg-terracotta text-white' : 'bg-slate/5 text-slate/40'}`}>
+                          <span className={`px-2 py-0.5 rounded-sm text-[9px] uppercase font-black tracking-widest ${log.team.toLowerCase() === activeTeam ? 'bg-terracotta text-white' : 'bg-slate/5 text-slate/40'}`}>
                             {log.team}
                           </span>
                         </td>
