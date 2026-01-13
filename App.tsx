@@ -113,7 +113,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="xl:hidden bg-ivory fixed inset-0 z-[100] animate-menu-in flex flex-col overflow-y-auto">
           <div className="p-6 flex justify-between items-center border-b border-sand/20 sticky top-0 bg-ivory z-10">
@@ -142,15 +141,6 @@ const Navbar = () => {
             >
               Book Now
             </Link>
-            
-            <div className="pt-10 flex justify-center space-x-8 border-t border-sand/30 animate-fade-in mt-auto" style={{ animationDelay: '550ms' }}>
-              <a href="https://www.instagram.com/tidehotelsandresorts" className="text-slate/60 hover:text-terracotta transition-colors"><Instagram size={28}/></a>
-              <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" className="text-slate/60 hover:text-terracotta transition-colors"><Facebook size={28}/></a>
-              <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="text-slate/60 hover:text-terracotta transition-colors"><MessageCircle size={28}/></a>
-            </div>
-          </div>
-          <div className="p-6 text-center text-[9px] uppercase tracking-[0.3em] text-slate/30 font-bold bg-ivory">
-            © 2025 Tidé Hotels & Resorts
           </div>
         </div>
       )}
@@ -177,42 +167,30 @@ const Footer = () => {
                 <MapPin size={20} className="text-terracotta flex-shrink-0 mt-1" />
                 <address className="not-italic text-pearl/90">
                   <span className="block font-bold text-white mb-1">Tidé Hotels & Resorts</span>
-                  38 S.O. Williams Street,<br />
-                  Off Anthony Enahoro Street, Utako,<br />
-                  Abuja, Nigeria.
+                  38 S.O. Williams Street, Utako, Abuja.
                 </address>
               </div>
               <div className="flex items-center space-x-4">
                 <Phone size={20} className="text-terracotta flex-shrink-0" />
                 <span className="text-pearl/90">+234 911 111 1314</span>
               </div>
-              <div className="flex items-start space-x-4">
-                <Mail size={20} className="text-terracotta flex-shrink-0 mt-1" />
-                <div className="text-pearl/90">
-                  <a href="mailto:hello@tidehotelgroup.com" className="hover:text-terracotta transition-colors block">hello@tidehotelgroup.com</a>
-                  <a href="mailto:info@tidehotelgroup.com" className="hover:text-terracotta transition-colors block">info@tidehotelgroup.com</a>
-                </div>
-              </div>
             </div>
           </div>
 
           <div className="space-y-6 md:space-y-10">
             <h4 className="text-sand font-accent uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black border-b border-white/10 pb-4">Connect</h4>
-            <div className="flex space-x-6 mb-8 md:mb-12">
+            <div className="flex flex-wrap gap-5 mb-8">
               <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Instagram"><Instagram size={24} /></a>
-              <a href="https://www.linkedin.com/company/tidé-hotels/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="LinkedIn"><Linkedin size={24} /></a>
               <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Facebook"><Facebook size={24} /></a>
+              <a href="https://www.linkedin.com/company/tidé-hotels/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="LinkedIn"><Linkedin size={24} /></a>
               <a href="https://www.tiktok.com/@tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="TikTok"><TikTokIcon size={24} /></a>
+              <a href="https://api.whatsapp.com/send/?phone=2349111111314" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="WhatsApp"><MessageCircle size={24} /></a>
             </div>
             <Link to="/staff" className="inline-flex items-center space-x-4 font-accent text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-sand hover:text-white transition-all border border-white/10 rounded-sm px-6 py-4 w-full justify-center hover:bg-white/5">
               <Lock size={12} />
               <span>Internal Operations</span>
             </Link>
           </div>
-        </div>
-        
-        <div className="border-t border-white/5 pt-10 text-center font-accent text-[10px] tracking-[0.3em] md:tracking-[0.5em] uppercase text-white/30 font-black">
-          © 2025 Tidé Hotels & Resorts. All Rights Reserved.
         </div>
       </div>
     </footer>
@@ -221,14 +199,12 @@ const Footer = () => {
 
 const WhatsAppButton = () => (
   <a
-    href="https://api.whatsapp.com/send/?phone=2349111111314&text&type=phone_number&app_absent=0"
+    href="https://api.whatsapp.com/send/?phone=2349111111314"
     target="_blank"
     rel="noopener noreferrer"
-    className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-40 bg-[#25D366] text-white p-4 md:p-5 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center group"
-    title="Chat with us"
+    className="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all"
   >
-    <MessageCircle size={28} md:size={32} fill="currentColor" />
-    <span className="hidden md:block max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-500 font-accent text-[10px] uppercase tracking-widest font-black whitespace-nowrap">Chat With Us</span>
+    <MessageCircle size={28} fill="currentColor" />
   </a>
 );
 
