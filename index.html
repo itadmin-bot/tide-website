@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Tidé Hotels & Resorts | Luxury Boutique Comfort in Abuja</title>
     
     <!-- Preload Critical Hero Images -->
@@ -63,14 +63,15 @@
     <style>
       html {
         scroll-behavior: smooth;
-        height: -webkit-fill-available;
-        touch-action: manipulation;
+        min-height: 100%;
+        width: 100%;
       }
       body {
         font-family: 'Inter', sans-serif;
         background-color: #F7F2DD;
         color: #343A3F;
-        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
         min-height: 100vh;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -78,14 +79,17 @@
         flex-direction: column;
         font-size: 16px; 
         line-height: 1.6;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
       @media (min-width: 768px) {
         body { font-size: 18px; }
       }
       #root {
-        flex: 1;
+        flex: 1 0 auto;
         display: flex;
         flex-direction: column;
+        width: 100%;
       }
 
       h1, h2, h3, h4, .font-serif {

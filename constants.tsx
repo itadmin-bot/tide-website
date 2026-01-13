@@ -123,3 +123,76 @@ export const TEAM_STRUCTURE = [
   "Zenza",
   "Culinary"
 ];
+
+export const ZENZA_DRINKS = [
+  {
+    category: "Whiskey",
+    items: [
+      { name: "Glen 21 yrs", price: 320000 },
+      { name: "Glen 18 yrs", price: 276425 },
+      { name: "Glen 15 yrs", price: 174999 },
+      { name: "Glen 12 yrs", price: 120000 },
+      { name: "Jameson Black Barrel", price: 79500 },
+      { name: "Black Label", price: 79000 },
+      { name: "Jack Daniels", price: 56000 },
+      { name: "Jameson Green Irish", price: 48000 },
+      { name: "Williams Lawson", price: 31000 },
+    ]
+  },
+  {
+    category: "Cognac",
+    items: [
+      { name: "Hennessy XO", price: 790000 },
+      { name: "Remy Martins XO", price: 675625 },
+      { name: "Hennessy VSOP", price: 205000 },
+      { name: "Martel Blue Swift", price: 185250 },
+      { name: "Hennessy VS", price: 180000 },
+      { name: "Remy Martins VSOP", price: 158000 },
+      { name: "Martel VS", price: 94000 },
+    ]
+  },
+  {
+    category: "Wines",
+    items: [
+      { name: "Nederburg", price: 40000 },
+      { name: "Escudo Rojo", price: 40000 },
+      { name: "Martini Rosso", price: 27000 },
+      { name: "Dostdy Hoff Big", price: 23000 },
+      { name: "Don Felders", price: 22000 },
+      { name: "Carlo Rossi (R/W/S)", price: 19000 },
+      { name: "4th Street", price: 18000 },
+      { name: "Declan", price: 15500 },
+      { name: "Four Cousins", price: 15000 },
+      { name: "Veleta (Non-Alc)", price: 8000 },
+    ]
+  },
+  {
+    category: "Gin & Vodka",
+    items: [
+      { name: "Hendrick Gin", price: 85000 },
+      { name: "Ciroc Vodka", price: 80000 },
+      { name: "Bombay Sapphire", price: 41000 },
+      { name: "Absolute Vodka Big", price: 38000 },
+      { name: "Olmeca Tequila", price: 47000 },
+      { name: "Kahlua", price: 43000 },
+      { name: "Gordon Gin Big", price: 12000 },
+      { name: "Skyy Vodka Small", price: 10000 },
+    ]
+  },
+  {
+    category: "Beer & Softs",
+    items: [
+      { name: "Black Bullet", price: 5000 },
+      { name: "Red Bull", price: 5000 },
+      { name: "Chi Ice Tea", price: 5000 },
+      { name: "Guinness Stout", price: 4000 },
+      { name: "Heineken", price: 3000 },
+      { name: "Desperado", price: 3000 },
+      { name: "Smirnoff Double Black", price: 3000 },
+      { name: "Amstel Malt", price: 2000 },
+      { name: "Soft Drinks", price: 2000 },
+      { name: "Trophy", price: 1600 },
+      { name: "Water (60cl)", price: 600 },
+    ]
+  }
+];
