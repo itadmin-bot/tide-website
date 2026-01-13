@@ -6,7 +6,18 @@ export interface Room {
   amenities: string[];
   occupancy: string;
   image: string;
+  gallery: string[];
   price?: string;
+}
+
+export interface MeetingRoom {
+  id: string;
+  name: string;
+  description: string;
+  capacity: string;
+  features: string[];
+  image: string;
+  gallery: string[];
 }
 
 export interface Testimonial {

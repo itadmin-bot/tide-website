@@ -7,6 +7,7 @@ const Dining: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState(ZENZA_DRINKS[0].category);
   const [displayCategory, setDisplayCategory] = useState(ZENZA_DRINKS[0].category);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleCategoryChange = (category: string) => {
     if (category === activeCategory || isTransitioning) return;
@@ -32,20 +33,21 @@ const Dining: React.FC = () => {
 
   return (
     <div className="pb-12 md:pb-32">
-      {/* Hero */}
-      <section className="relative min-h-[60vh] md:min-h-[85vh] flex items-center justify-center py-16 md:py-32 overflow-hidden">
+      {/* Hero Section - Added consistent high-end picture */}
+      <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center py-16 md:py-32 overflow-hidden bg-slate">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1544145945-f904253d0c7b?auto=format&fit=crop&q=80&w=1920" 
-            alt="Dining" 
-            className="w-full h-full object-cover brightness-[0.3] scale-110" 
+            src="https://images.unsplash.com/photo-1592633312328-831e670ca395?auto=format&fit=crop&q=80&w=1920" 
+            alt="In-Room Dining" 
+            onLoad={() => setImageLoaded(true)}
+            className={`w-full h-full object-cover brightness-[0.35] transition-all duration-1000 ease-out scale-105 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0'}`}
           />
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-ivory/10"></div>
         </div>
         
         <div className="relative z-10 text-center text-white px-6 w-full max-w-5xl mx-auto pt-20 md:pt-32">
           <div className="stagger-reveal">
-            <span className="font-accent text-[9px] md:text-[11px] font-black block mb-4 md:mb-8 tracking-[0.4em] md:tracking-[0.5em] text-sand uppercase animate-fade-in">Culinary Art</span>
+            <span className="font-accent text-[9px] md:text-[11px] font-black block mb-4 md:mb-8 tracking-[0.5em] text-sand uppercase animate-fade-in">Culinary Art</span>
             <h1 className="hero-title font-serif text-white font-bold text-shadow-premium animate-slide-up">
               The Tidé <span className="italic font-light text-pearl">Kitchen</span>
             </h1>
@@ -93,7 +95,7 @@ const Dining: React.FC = () => {
                 href="https://www.jotform.com/app/253071477806562"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center space-x-4 md:space-x-8 bg-terracotta text-white px-8 md:px-16 py-4 md:py-7 font-accent text-[9px] md:text-[12px] font-black hover:bg-slate transition-all shadow-2xl tracking-[0.2em] md:tracking-[0.4em] w-full sm:w-auto uppercase"
+                className="inline-flex items-center justify-center space-x-4 md:space-x-8 bg-terracotta text-white px-8 md:px-16 py-4 md:py-7 font-accent text-[9px] md:text-[12px] font-black hover:bg-slate transition-all shadow-2xl tracking-[0.3em] md:tracking-[0.4em] w-full sm:w-auto uppercase hover:scale-105 active:scale-95 transform"
               >
                 <UtensilsCrossed size={18} md:size={24} />
                 <span>Explore Food Menu</span>
@@ -183,27 +185,6 @@ const Dining: React.FC = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sommelier Highlight */}
-      <section className="bg-ivory py-16 md:py-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {[
-              { icon: <Wine />, title: "Vintage Vault", body: "Explore our cellar's diverse range, from approachable Carlo Rossi labels to sophisticated Nederburg selections." },
-              { icon: <GlassWater />, title: "The Cognac Room", body: "A tribute to fine craftsmanship, featuring Hennessy XO and Remy Martins XO for those who appreciate intensity." },
-              { icon: <Beer />, title: "Chilled Spirits", body: "Perfectly served local and international brews, including Guinness Stout and Heineken, kept at optimal temperatures." }
-            ].map((feature, i) => (
-              <div key={i} className="bg-white p-8 md:p-12 border border-sand/30 shadow-xl group hover:bg-slate hover:text-white transition-all duration-700 reveal-on-scroll sr-up" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="text-terracotta mb-6 group-hover:scale-110 transition-transform duration-500">
-                  {React.cloneElement(feature.icon as React.ReactElement, { size: 36, strokeWidth: 1.2 })}
-                </div>
-                <h4 className="font-serif text-xl md:text-3xl font-bold mb-3 italic leading-tight">{feature.title}</h4>
-                <p className="text-slate/60 text-sm md:text-base leading-relaxed group-hover:text-pearl/60 font-medium transition-colors duration-500">{feature.body}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Room, StaffLink, Testimonial } from './types.ts';
+import { Room, StaffLink, Testimonial, MeetingRoom } from './types.ts';
 
 export const LOGO_URL = "https://i.ibb.co/7JvXPb0d/Artboard-1-copy-5-1.png";
 
@@ -12,6 +12,11 @@ export const ROOMS: Room[] = [
     amenities: ["High-speed Wi-Fi", "Luxury Bedding", "Air Conditioning", "En-suite Bathroom"],
     occupancy: "2 Adults",
     image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1505693414953-ad7983693a3f?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200"
+    ]
   },
   {
     id: "double",
@@ -20,6 +25,11 @@ export const ROOMS: Room[] = [
     amenities: ["Premium Twin Beds", "Smart TV", "Work Desk", "24/7 Room Service"],
     occupancy: "2 Adults",
     image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=1200"
+    ]
   },
   {
     id: "studio",
@@ -28,6 +38,11 @@ export const ROOMS: Room[] = [
     amenities: ["Kitchenette", "Coffee Station", "Lounge Area", "High-speed Wi-Fi"],
     occupancy: "2 Adults",
     image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80&w=1200"
+    ]
   },
   {
     id: "suite",
@@ -36,6 +51,40 @@ export const ROOMS: Room[] = [
     amenities: ["Separate Living Area", "King Size Bed", "Premium Mini-bar", "City View"],
     occupancy: "2-3 Adults",
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1591088398332-8a77d399e80c?auto=format&fit=crop&q=80&w=1200"
+    ]
+  }
+];
+
+export const MEETING_ROOMS: MeetingRoom[] = [
+  {
+    id: "boardroom",
+    name: "The Tidé Boardroom",
+    description: "A sanctuary for strategic thinking. Our boardroom offers ultimate privacy and cutting-edge tech for executive meetings.",
+    capacity: "Up to 12 Guests",
+    features: ["4K Projection", "Video Conferencing", "Gourmet Catering", "Climate Controlled"],
+    image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=1200"
+    ]
+  },
+  {
+    id: "grand-hall",
+    name: "The Tidé Event Space",
+    description: "A versatile, light-filled space perfect for product launches, intimate celebrations, or corporate workshops.",
+    capacity: "Up to 50 Guests",
+    features: ["Flexible Seating", "Advanced Audio", "Ambient Lighting", "Pre-function Area"],
+    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200"
+    ]
   }
 ];
 
