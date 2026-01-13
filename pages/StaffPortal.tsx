@@ -21,10 +21,20 @@ const TikTokIcon = ({ size = 24 }: { size?: number }) => (
 const VALID_PASSWORDS = ['guestrelations', 'it', 'poc', 'maintenance', 'operations', 'store', 'whispers', 'zenza', 'culinary', 'sales'];
 
 const getTeamDisplay = (id: string) => {
-  if (id === 'maintenance') return 'Facility & work';
-  if (id === 'operations') return 'Tidé Hotels & Resorts';
-  if (id === 'poc') return 'People Operation and Culture';
-  return id.charAt(0).toUpperCase() + id.slice(1);
+  const mapping: Record<string, string> = {
+    'maintenance': 'Facility & work',
+    'operations': 'Tidé Hotels & Resorts',
+    'poc': 'People Operation and Culture',
+    'guestrelations': 'Guest Relations',
+    'it': 'IT',
+    'sales': 'Sales',
+    'store': 'Store',
+    'whispers': 'Whispers',
+    'zenza': 'Zenza',
+    'culinary': 'Culinary'
+  };
+  const key = id.toLowerCase().trim();
+  return mapping[key] || (id.charAt(0).toUpperCase() + id.slice(1));
 };
 
 const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -121,7 +131,13 @@ const StaffPortal: React.FC = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
         <div>
           <h1 className="text-4xl md:text-5xl font-serif mb-2 font-bold text-slate">Operations Center</h1>
-          <p className="text-terracotta uppercase tracking-[0.3em] text-[9px] font-black">Tidé Hotels & Resorts Management Suite</p>
+          <div className="flex flex-wrap items-center gap-4 mt-2">
+            <p className="text-terracotta uppercase tracking-[0.3em] text-[9px] font-black">Tidé Hotels & Resorts Management Suite</p>
+            <div className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-green-600 bg-green-100 px-3 py-1 rounded-sm border border-green-200">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+              <span>{getTeamDisplay(activeTeam)}: Online</span>
+            </div>
+          </div>
         </div>
         <button onClick={handleLogout} className="flex items-center space-x-3 bg-pearl px-8 py-3 rounded-sm text-[9px] uppercase tracking-widest font-black hover:bg-terracotta hover:text-white transition-all shadow-sm">
           <LogOut size={16} /><span>Exit Portal</span>
@@ -159,14 +175,17 @@ const StaffPortal: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {STAFF_LINKS.map((link) => (
-              <a key={link.title} href={link.url} target="_blank" onClick={() => handleResourceClick(link.title)} className="bg-white p-8 border border-sand/40 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all group">
+              <a key={link.title} href={link.url} target="_blank" onClick={() => handleResourceClick(link.title)} className={`bg-white p-8 border border-sand/40 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all group ${normalize(link.category) === normalize(getTeamDisplay(activeTeam)) ? 'ring-2 ring-terracotta ring-offset-4' : ''}`}>
                 <div className="flex justify-between items-start mb-6">
                   <div className="bg-ivory p-3 group-hover:bg-terracotta group-hover:text-white transition-colors">
                     <FileText size={24} />
                   </div>
                   <ExternalLink size={16} className="text-slate/10 group-hover:text-terracotta" />
                 </div>
-                <span className="text-[8px] uppercase tracking-[0.3em] font-black text-terracotta block mb-2">{link.category}</span>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[8px] uppercase tracking-[0.3em] font-black text-terracotta block">{link.category}</span>
+                  {normalize(link.category) === normalize(getTeamDisplay(activeTeam)) && <span className="bg-terracotta text-white text-[7px] px-1.5 py-0.5 rounded-full uppercase font-black">My Team</span>}
+                </div>
                 <h3 className="text-xl font-serif mb-3 group-hover:text-terracotta font-bold">{link.title}</h3>
                 <p className="text-xs text-slate/50 leading-relaxed">{link.description}</p>
               </a>
@@ -175,12 +194,12 @@ const StaffPortal: React.FC = () => {
 
           <div className="bg-white border border-sand/40 shadow-sm rounded-sm overflow-hidden">
             <div className="p-5 bg-slate text-white flex justify-between items-center">
-              <h3 className="text-xl font-serif font-bold">Recent Operations Log</h3>
+              <h3 className="text-xl font-serif font-bold">Operation Logs</h3>
               <div className="relative">
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
                 <input 
                   type="text" 
-                  placeholder="Filter logs..." 
+                  placeholder="Search logs..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="bg-white/10 border border-white/20 rounded-full pl-10 pr-4 py-1.5 text-xs outline-none focus:bg-white/20" 
@@ -201,16 +220,11 @@ const StaffPortal: React.FC = () => {
                   {filteredLogs.map((log) => (
                     <tr key={log.id} className="hover:bg-ivory/30 transition-colors">
                       <td className="px-6 py-4 text-slate/50 font-mono text-[9px]">{log.timestamp}</td>
-                      <td className="px-6 py-4"><span className="px-2 py-0.5 rounded-sm text-[8px] uppercase font-black bg-slate/5 text-slate/40">{log.team}</span></td>
+                      <td className="px-6 py-4"><span className={`px-2 py-0.5 rounded-sm text-[8px] uppercase font-black ${normalize(log.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta/10 text-terracotta' : 'bg-slate/5 text-slate/40'}`}>{log.team}</span></td>
                       <td className="px-6 py-4 font-bold text-slate text-[11px]">{log.action}</td>
                       <td className="px-6 py-4 text-slate/60 text-[11px] italic truncate max-w-[200px]">{log.details}</td>
                     </tr>
                   ))}
-                  {filteredLogs.length === 0 && (
-                    <tr>
-                      <td colSpan={4} className="px-6 py-12 text-center text-slate/30 italic text-sm">No operational logs found.</td>
-                    </tr>
-                  )}
                 </tbody>
               </table>
             </div>
@@ -221,27 +235,36 @@ const StaffPortal: React.FC = () => {
           <div className="bg-slate text-white p-8 rounded-sm shadow-2xl relative overflow-hidden">
             <h3 className="text-xl font-serif mb-6 flex items-center space-x-4 font-bold">
               <Users size={24} />
-              <span>Team Structure</span>
+              <span>Team Directory</span>
             </h3>
             <div className="space-y-4">
               {TEAM_STRUCTURE.map((dept) => (
-                <div key={dept} className="flex justify-between items-center py-2.5 border-b border-white/5 last:border-0">
+                <div key={dept} className={`flex justify-between items-center py-2.5 border-b border-white/5 last:border-0 ${normalize(dept) === normalize(getTeamDisplay(activeTeam)) ? 'text-sand font-bold' : 'text-white/60'}`}>
                   <span className="text-xs tracking-wide font-light">{dept}</span>
-                  <div className="w-2 h-2 rounded-full bg-terracotta/40"></div>
+                  {normalize(dept) === normalize(getTeamDisplay(activeTeam)) ? (
+                    <div className="flex items-center space-x-2">
+                      <span className="text-[8px] uppercase font-black">You</span>
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    </div>
+                  ) : (
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-ivory/50 p-8 border border-sand/30 rounded-sm">
-            <h4 className="font-accent text-[9px] font-black uppercase tracking-[0.4em] text-slate mb-6">Staff Wellbeing</h4>
-            <p className="text-xs text-slate/60 leading-relaxed italic mb-8">"Your excellence is our legacy. Remember to practice the IQG-LLW values in every guest interaction today."</p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-4 border border-sand/10 shadow-sm text-center">
-                <span className="block text-[10px] font-black text-terracotta uppercase">Innovative</span>
-              </div>
-              <div className="bg-white p-4 border border-sand/10 shadow-sm text-center">
-                <span className="block text-[10px] font-black text-terracotta uppercase">Quality</span>
-              </div>
+          <div className="bg-white p-8 border border-sand/30 rounded-sm shadow-sm">
+            <h4 className="font-accent text-[9px] font-black uppercase tracking-[0.4em] text-slate mb-6">Staff Ethos</h4>
+            <p className="text-xs text-slate/60 leading-relaxed italic mb-8">"Excellence is not an act, but a habit. We are building legacies with every interaction."</p>
+            <div className="space-y-4">
+               <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate/40 border-b border-sand/10 pb-2">
+                 <span>Active Status</span>
+                 <span className="text-green-600">Secure Connection</span>
+               </div>
+               <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate/40 border-b border-sand/10 pb-2">
+                 <span>Current Team</span>
+                 <span className="text-terracotta">{getTeamDisplay(activeTeam)}</span>
+               </div>
             </div>
           </div>
         </div>
