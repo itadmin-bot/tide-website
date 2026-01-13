@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, Linkedin, Facebook, MessageCircle, Phone, MapPin, Mail, Lock } from 'lucide-react';
@@ -58,17 +59,17 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-    // Accessibility: prevent scrolling on HTML as well for some mobile browsers
     document.documentElement.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
+    { name: 'Our Compass', path: '/about' },
     { name: 'Rooms', path: '/rooms' },
     { name: 'Experience', path: '/experience' },
     { name: 'Dining', path: '/dining' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Staff Portal', path: '/staff' },
   ];
 
   return (
@@ -79,12 +80,12 @@ const Navbar = () => {
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 md:h-12 w-auto" />
           </Link>
           
-          <div className="hidden md:flex space-x-8 lg:space-x-10 items-center">
+          <div className="hidden xl:flex space-x-6 lg:space-x-8 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`font-accent text-[11px] tracking-[0.25em] uppercase font-bold transition-all hover:text-terracotta relative group ${
+                className={`font-accent text-[10px] tracking-[0.2em] uppercase font-bold transition-all hover:text-terracotta relative group ${
                   location.pathname === link.path ? 'text-terracotta' : 'text-slate'
                 }`}
               >
@@ -94,13 +95,13 @@ const Navbar = () => {
             ))}
             <Link
               to="/booking"
-              className="bg-terracotta text-white px-8 py-3 font-accent text-[11px] tracking-[0.2em] uppercase font-black hover:bg-slate hover:shadow-xl transition-all duration-300"
+              className="bg-terracotta text-white px-6 py-2.5 font-accent text-[10px] tracking-[0.2em] uppercase font-black hover:bg-slate hover:shadow-xl transition-all duration-300"
             >
               Book Now
             </Link>
           </div>
 
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <button 
               onClick={toggleMenu} 
               className="text-slate p-2 focus:outline-none active:scale-90 transition-transform duration-75 relative z-[110]" 
@@ -114,19 +115,19 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden bg-ivory fixed inset-0 z-[100] animate-menu-in flex flex-col overflow-y-auto">
+        <div className="xl:hidden bg-ivory fixed inset-0 z-[100] animate-menu-in flex flex-col overflow-y-auto">
           <div className="p-6 flex justify-between items-center border-b border-sand/20 sticky top-0 bg-ivory z-10">
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 w-auto" />
             <div className="w-10"></div> 
           </div>
-          <div className="px-8 py-12 flex flex-col space-y-8 flex-grow justify-center">
+          <div className="px-8 py-12 flex flex-col space-y-6 flex-grow justify-center">
             {navLinks.map((link, idx) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={closeMenu}
                 style={{ animationDelay: `${idx * 70}ms` }}
-                className={`text-4xl tracking-tight font-serif font-bold transition-colors animate-slide-up block ${
+                className={`text-3xl tracking-tight font-serif font-bold transition-colors animate-slide-up block ${
                   location.pathname === link.path ? 'text-terracotta' : 'text-slate'
                 }`}
               >
@@ -165,7 +166,7 @@ const Footer = () => {
           <div className="space-y-6 md:space-y-10">
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-16 md:h-20 w-auto brightness-0 invert" />
             <p className="text-sand font-serif text-xl md:text-2xl leading-relaxed font-light italic opacity-90">
-              Refined comfort, genuine hospitality, and intentional design in the heart of Abuja.
+              Refining the Art of Stay through intentional design and genuine Nigerian hospitality.
             </p>
           </div>
           
@@ -205,7 +206,7 @@ const Footer = () => {
             </div>
             <Link to="/staff" className="inline-flex items-center space-x-4 font-accent text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-sand hover:text-white transition-all border border-white/10 rounded-sm px-6 py-4 w-full justify-center hover:bg-white/5">
               <Lock size={12} />
-              <span>Staff Access Portal</span>
+              <span>Internal Operations</span>
             </Link>
           </div>
         </div>
