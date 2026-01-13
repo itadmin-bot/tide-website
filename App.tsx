@@ -59,7 +59,6 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-    document.documentElement.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
   const navLinks = [
@@ -73,11 +72,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white shadow-md py-3' : 'bg-white/95 backdrop-blur-sm py-5 md:py-6'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white shadow-md py-2 md:py-3' : 'bg-white/95 backdrop-blur-sm py-4 md:py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95" onClick={closeMenu}>
-            <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 md:h-12 w-auto" />
+        <div className="flex justify-between items-center h-12 md:h-16">
+          <Link to="/" className="flex-shrink-0 transition-transform active:scale-95" onClick={closeMenu}>
+            <img src={LOGO_URL} alt="Tidé Hotels" className="h-7 sm:h-9 md:h-12 w-auto object-contain" />
           </Link>
           
           <div className="hidden xl:flex space-x-6 lg:space-x-8 items-center">
@@ -104,29 +103,29 @@ const Navbar = () => {
           <div className="xl:hidden">
             <button 
               onClick={toggleMenu} 
-              className="text-slate p-2 focus:outline-none active:scale-90 transition-transform duration-75 relative z-[110]" 
+              className="text-slate p-2 focus:outline-none active:scale-90 relative z-[110]" 
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
       </div>
 
       {isOpen && (
-        <div className="xl:hidden bg-ivory fixed inset-0 z-[100] animate-menu-in flex flex-col overflow-y-auto">
+        <div className="xl:hidden bg-ivory fixed inset-0 z-[100] animate-menu-in flex flex-col overflow-y-auto pt-safe pb-safe">
           <div className="p-6 flex justify-between items-center border-b border-sand/20 sticky top-0 bg-ivory z-10">
             <img src={LOGO_URL} alt="Tidé Hotels" className="h-8 w-auto" />
             <div className="w-10"></div> 
           </div>
-          <div className="px-8 py-12 flex flex-col space-y-6 flex-grow justify-center">
+          <div className="px-8 py-10 flex flex-col space-y-6 flex-grow justify-center">
             {navLinks.map((link, idx) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={closeMenu}
-                style={{ animationDelay: `${idx * 70}ms` }}
-                className={`text-3xl tracking-tight font-serif font-bold transition-colors animate-slide-up block ${
+                style={{ animationDelay: `${idx * 50}ms` }}
+                className={`text-2xl sm:text-3xl tracking-tight font-serif font-bold transition-colors animate-slide-up block ${
                   location.pathname === link.path ? 'text-terracotta' : 'text-slate'
                 }`}
               >
@@ -136,11 +135,19 @@ const Navbar = () => {
             <Link
               to="/booking"
               onClick={closeMenu}
-              className="w-full bg-terracotta text-white text-center py-5 font-accent text-xs tracking-widest uppercase font-black shadow-xl mt-6 animate-slide-up"
-              style={{ animationDelay: '450ms' }}
+              className="w-full bg-terracotta text-white text-center py-4 sm:py-5 font-accent text-xs tracking-widest uppercase font-black shadow-xl mt-4 animate-slide-up"
+              style={{ animationDelay: '400ms' }}
             >
               Book Now
             </Link>
+          </div>
+          
+          <div className="px-8 py-8 mt-auto border-t border-sand/10 bg-ivory/50">
+             <div className="flex justify-center space-x-6">
+                <a href="https://www.instagram.com/tidehotelsandresorts" className="text-slate/60 hover:text-terracotta"><Instagram size={20} /></a>
+                <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="text-slate/60 hover:text-terracotta"><MessageCircle size={20} /></a>
+                <a href="tel:+2349111111314" className="text-slate/60 hover:text-terracotta"><Phone size={20} /></a>
+             </div>
           </div>
         </div>
       )}
@@ -150,47 +157,50 @@ const Navbar = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-slate text-pearl pt-16 md:pt-24 pb-10 border-t-[6px] md:border-t-[12px] border-terracotta">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-20 mb-12 md:mb-24">
-          <div className="space-y-6 md:space-y-10">
-            <img src={LOGO_URL} alt="Tidé Hotels" className="h-16 md:h-20 w-auto brightness-0 invert" />
-            <p className="text-sand font-serif text-xl md:text-2xl leading-relaxed font-light italic opacity-90">
+    <footer className="bg-slate text-pearl pt-12 md:pt-24 pb-8 border-t-[4px] md:border-t-[12px] border-terracotta">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-20 mb-12 md:mb-24">
+          <div className="space-y-6">
+            <img src={LOGO_URL} alt="Tidé Hotels" className="h-12 md:h-20 w-auto brightness-0 invert" />
+            <p className="text-sand font-serif text-lg md:text-2xl leading-relaxed italic opacity-90">
               Refining the Art of Stay through intentional design and genuine Nigerian hospitality.
             </p>
           </div>
           
-          <div className="space-y-6 md:space-y-10">
-            <h4 className="text-sand font-accent uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black border-b border-white/10 pb-4">Contact Us</h4>
-            <div className="space-y-6 text-sm md:text-base font-medium leading-relaxed">
+          <div className="space-y-6">
+            <h4 className="text-sand font-accent uppercase tracking-[0.2em] md:tracking-[0.4em] text-[10px] md:text-[11px] font-black border-b border-white/10 pb-4">Contact Us</h4>
+            <div className="space-y-4 md:space-y-6 text-sm md:text-base font-medium">
               <div className="flex items-start space-x-4">
-                <MapPin size={20} className="text-terracotta flex-shrink-0 mt-1" />
+                <MapPin size={18} className="text-terracotta flex-shrink-0 mt-1" />
                 <address className="not-italic text-pearl/90">
                   <span className="block font-bold text-white mb-1">Tidé Hotels & Resorts</span>
                   38 S.O. Williams Street, Utako, Abuja.
                 </address>
               </div>
               <div className="flex items-center space-x-4">
-                <Phone size={20} className="text-terracotta flex-shrink-0" />
+                <Phone size={18} className="text-terracotta flex-shrink-0" />
                 <span className="text-pearl/90">+234 911 111 1314</span>
               </div>
             </div>
           </div>
 
-          <div className="space-y-6 md:space-y-10">
-            <h4 className="text-sand font-accent uppercase tracking-[0.4em] text-[10px] md:text-[11px] font-black border-b border-white/10 pb-4">Connect</h4>
-            <div className="flex flex-wrap gap-5 mb-8">
-              <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Instagram"><Instagram size={24} /></a>
-              <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="Facebook"><Facebook size={24} /></a>
-              <a href="https://www.linkedin.com/company/tidé-hotels/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="LinkedIn"><Linkedin size={24} /></a>
-              <a href="https://www.tiktok.com/@tidehotelsandresorts" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="TikTok"><TikTokIcon size={24} /></a>
-              <a href="https://api.whatsapp.com/send/?phone=2349111111314" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-transform hover:scale-110" title="WhatsApp"><MessageCircle size={24} /></a>
+          <div className="space-y-6">
+            <h4 className="text-sand font-accent uppercase tracking-[0.2em] md:tracking-[0.4em] text-[10px] md:text-[11px] font-black border-b border-white/10 pb-4">Connect</h4>
+            <div className="flex flex-wrap gap-4 mb-6">
+              <a href="https://www.instagram.com/tidehotelsandresorts" className="hover:text-terracotta transition-transform hover:scale-110" title="Instagram"><Instagram size={20} /></a>
+              <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" className="hover:text-terracotta transition-transform hover:scale-110" title="Facebook"><Facebook size={20} /></a>
+              <a href="https://www.linkedin.com/company/tidé-hotels/" className="hover:text-terracotta transition-transform hover:scale-110" title="LinkedIn"><Linkedin size={20} /></a>
+              <a href="https://www.tiktok.com/@tidehotelsandresorts" className="hover:text-terracotta transition-transform hover:scale-110" title="TikTok"><TikTokIcon size={20} /></a>
+              <a href="https://api.whatsapp.com/send/?phone=2349111111314" className="hover:text-terracotta transition-transform hover:scale-110" title="WhatsApp"><MessageCircle size={20} /></a>
             </div>
-            <Link to="/staff" className="inline-flex items-center space-x-4 font-accent text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-sand hover:text-white transition-all border border-white/10 rounded-sm px-6 py-4 w-full justify-center hover:bg-white/5">
+            <Link to="/staff" className="inline-flex items-center space-x-3 font-accent text-[9px] md:text-[11px] uppercase tracking-[0.3em] font-bold text-sand hover:text-white transition-all border border-white/10 rounded-sm px-4 py-3 w-full justify-center hover:bg-white/5">
               <Lock size={12} />
               <span>Internal Operations</span>
             </Link>
           </div>
+        </div>
+        <div className="pt-8 border-t border-white/5 text-center">
+           <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-pearl/20 font-black">© {new Date().getFullYear()} Tidé Hotels & Resorts. Excellence as standard.</p>
         </div>
       </div>
     </footer>
@@ -202,9 +212,9 @@ const WhatsAppButton = () => (
     href="https://api.whatsapp.com/send/?phone=2349111111314"
     target="_blank"
     rel="noopener noreferrer"
-    className="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all"
+    className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 bg-[#25D366] text-white p-3.5 sm:p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all"
   >
-    <MessageCircle size={28} fill="currentColor" />
+    <MessageCircle size={24} sm:size={28} fill="currentColor" />
   </a>
 );
 

@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <title>Tidé Hotels & Resorts | Luxury Boutique Comfort in Abuja</title>
     
     <!-- Preload Critical Hero Images -->
@@ -65,6 +65,7 @@
         scroll-behavior: smooth;
         min-height: 100%;
         width: 100%;
+        overflow-x: hidden;
       }
       body {
         font-family: 'Inter', sans-serif;
@@ -78,18 +79,17 @@
         display: flex;
         flex-direction: column;
         font-size: 16px; 
-        line-height: 1.6;
+        line-height: 1.5;
         overflow-x: hidden;
         overflow-y: auto;
       }
-      @media (min-width: 768px) {
-        body { font-size: 18px; }
-      }
+      
       #root {
         flex: 1 0 auto;
         display: flex;
         flex-direction: column;
         width: 100%;
+        max-width: 100vw;
       }
 
       h1, h2, h3, h4, .font-serif {
@@ -101,39 +101,43 @@
       }
 
       .hero-title {
-        font-size: clamp(2.25rem, 10vw, 7rem);
-        line-height: 1.05;
+        font-size: clamp(2rem, 9vw, 7rem);
+        line-height: 1.1;
         letter-spacing: -0.02em;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
       }
 
       h2 {
-        font-size: clamp(1.85rem, 5vw, 4rem);
+        font-size: clamp(1.75rem, 5vw, 4rem);
         line-height: 1.1;
-        margin-bottom: 1.25rem;
-      }
-
-      h3 {
-        font-size: clamp(1.4rem, 3vw, 2.25rem);
-        line-height: 1.2;
+        margin-bottom: 1rem;
       }
 
       .font-accent {
         font-family: 'Tenor Sans', sans-serif;
-        letter-spacing: 0.3em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
+      }
+      
+      @media (min-width: 768px) {
+        .font-accent { letter-spacing: 0.3em; }
+        body { font-size: 18px; }
       }
 
       .reveal-on-scroll {
         opacity: 0;
         will-change: transform, opacity;
-        transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
       }
       
-      .sr-up { transform: translateY(50px); }
-      .sr-down { transform: translateY(-50px); }
-      .sr-left { transform: translateX(50px); }
-      .sr-right { transform: translateX(-50px); }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal-on-scroll { transition: opacity 0.3s ease; transform: none !important; }
+      }
+
+      .sr-up { transform: translateY(30px); }
+      .sr-down { transform: translateY(-30px); }
+      .sr-left { transform: translateX(20px); }
+      .sr-right { transform: translateX(-20px); }
 
       .reveal-on-scroll.is-visible {
         opacity: 1;
@@ -142,31 +146,25 @@
       
       a, button {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        touch-action: manipulation;
       }
       
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: #F7F2DD; }
-      ::-webkit-scrollbar-thumb { background: #8C4411; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       
       .text-shadow-premium {
-        text-shadow: 0 4px 25px rgba(0,0,0,0.45);
+        text-shadow: 0 4px 20px rgba(0,0,0,0.5);
       }
 
       .leaflet-container { font-family: 'Inter', sans-serif; background: #F7F2DD; }
 
-      @supports(padding: max(0px)) {
-        .pb-safe {
-          padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-        }
-      }
-
-      /* Custom image fade for better UX */
-      .hero-image-fade {
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-      }
-      .hero-image-fade.loaded {
-        opacity: 1;
+      .content-container {
+        width: 100%;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: clamp(1rem, 5vw, 2rem);
+        padding-right: clamp(1rem, 5vw, 2rem);
       }
     </style>
   <script type="importmap">
@@ -174,10 +172,10 @@
   "imports": {
     "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "leaflet": "https://esm.sh/leaflet@1.9.4"
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "leaflet": "https://esm.sh/leaflet@^1.9.4"
   }
 }
 </script>
@@ -191,7 +189,7 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('is-visible');
           });
-        }, { threshold: 0.1, rootMargin: "0px 0px -80px 0px" });
+        }, { threshold: 0.05, rootMargin: "0px 0px -40px 0px" });
 
         document.querySelectorAll('.reveal-on-scroll').forEach(t => observer.observe(t));
         return observer;

@@ -109,13 +109,13 @@ const StaffPortal: React.FC = () => {
       <div className="min-h-screen flex flex-col items-center justify-center bg-ivory/50 px-6 pt-24 pb-16 animate-fade-in">
         <div className="max-w-md w-full bg-white p-8 md:p-12 rounded-sm shadow-2xl border border-sand">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-slate text-white rounded-full mb-6 shadow-inner"><Lock size={32} /></div>
-            <h1 className="text-3xl font-serif font-bold text-slate">Internal Portal</h1>
+            <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-slate text-white rounded-full mb-6 shadow-inner"><Lock size={28} /></div>
+            <h1 className="text-2xl md:text-3xl font-serif font-bold text-slate">Internal Portal</h1>
             <p className="text-terracotta text-[9px] uppercase tracking-[0.3em] mt-3 font-black">Authorized Personnel Only</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="block text-[9px] uppercase tracking-widest font-bold text-slate/60 mb-3">Secure Access Key</label>
+              <label className="block text-[9px] uppercase tracking-widest font-bold text-slate/60 mb-2 md:mb-3">Secure Access Key</label>
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-pearl/30 border border-sand rounded-sm px-4 py-3.5 outline-none focus:border-terracotta focus:bg-white transition-all text-sm tracking-widest" />
               {error && <p className="text-terracotta text-[9px] mt-2 font-bold uppercase tracking-widest">{error}</p>}
             </div>
@@ -127,102 +127,94 @@ const StaffPortal: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 pt-32 md:pt-40 pb-16 animate-fade-in">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 pt-24 md:pt-40 pb-16 animate-fade-in">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
         <div>
-          <h1 className="text-4xl md:text-5xl font-serif mb-2 font-bold text-slate">Operations Center</h1>
-          <div className="flex flex-wrap items-center gap-4 mt-2">
-            <p className="text-terracotta uppercase tracking-[0.3em] text-[9px] font-black">Tidé Hotels & Resorts Management Suite</p>
-            <div className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-green-600 bg-green-100 px-3 py-1 rounded-sm border border-green-200">
+          <h1 className="text-3xl md:text-5xl font-serif mb-2 font-bold text-slate">Operations Center</h1>
+          <div className="flex flex-wrap items-center gap-3 mt-1">
+            <p className="text-terracotta uppercase tracking-[0.2em] text-[8px] md:text-[9px] font-black">Tidé Hotels & Resorts Management Suite</p>
+            <div className="flex items-center space-x-2 text-[9px] font-black uppercase tracking-widest text-green-600 bg-green-100 px-2 py-1 rounded-sm border border-green-200">
               <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-              <span>{getTeamDisplay(activeTeam)}: Online</span>
+              <span>{getTeamDisplay(activeTeam)}</span>
             </div>
           </div>
         </div>
-        <button onClick={handleLogout} className="flex items-center space-x-3 bg-pearl px-8 py-3 rounded-sm text-[9px] uppercase tracking-widest font-black hover:bg-terracotta hover:text-white transition-all shadow-sm">
+        <button onClick={handleLogout} className="flex items-center space-x-3 bg-pearl px-6 py-3 rounded-sm text-[9px] uppercase tracking-widest font-black hover:bg-terracotta hover:text-white transition-all shadow-sm w-full md:w-auto justify-center">
           <LogOut size={16} /><span>Exit Portal</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        <div className="lg:col-span-2 space-y-10">
-          {/* Social Media CTA for Staff */}
-          <div className="bg-terracotta text-white p-8 rounded-sm shadow-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform"><MessageSquare size={120} /></div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-8">
+          {/* Social Media CTA */}
+          <div className="bg-terracotta text-white p-6 md:p-8 rounded-sm shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:rotate-12 transition-transform"><MessageSquare size={100} /></div>
             <div className="relative z-10">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] mb-4 block text-sand">Community & Culture</span>
-              <h3 className="text-2xl md:text-3xl font-serif font-bold mb-6">Join Our Digital Legacy</h3>
-              <p className="text-pearl/80 text-sm md:text-base mb-8 max-w-lg leading-relaxed italic">Follow Tidé Hotels & Resorts on all platforms to stay updated on brand milestones and culture.</p>
-              <div className="flex flex-wrap gap-4">
-                <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" className="bg-white/10 hover:bg-white/20 p-3 rounded-sm transition-all flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest">
-                  <Instagram size={18} /><span>Instagram</span>
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] mb-3 block text-sand">Community & Culture</span>
+              <h3 className="text-xl md:text-3xl font-serif font-bold mb-4 md:mb-6">Join Our Digital Legacy</h3>
+              <p className="text-pearl/80 text-xs md:text-base mb-6 md:mb-8 max-w-lg leading-relaxed italic">Follow Tidé Hotels & Resorts on all platforms to stay updated on brand milestones.</p>
+              <div className="flex flex-wrap gap-3">
+                <a href="https://www.instagram.com/tidehotelsandresorts" target="_blank" className="bg-white/10 hover:bg-white/20 p-2.5 rounded-sm transition-all flex items-center space-x-2 text-[8px] uppercase font-black tracking-widest">
+                  <Instagram size={16} /><span>Instagram</span>
                 </a>
-                <a href="https://web.facebook.com/people/Tid%C3%A9-Hotelsandresorts/pfbid036Te83H2VyrSUEyf7S37xu5JTXPVZgwWsTsxTvVGzzSzk2AUzpDRFQ7nVNEvt5JPZl/" target="_blank" className="bg-white/10 hover:bg-white/20 p-3 rounded-sm transition-all flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest">
-                  <Facebook size={18} /><span>Facebook</span>
-                </a>
-                <a href="https://www.linkedin.com/company/tidé-hotels/" target="_blank" className="bg-white/10 hover:bg-white/20 p-3 rounded-sm transition-all flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest">
-                  <Linkedin size={18} /><span>LinkedIn</span>
-                </a>
-                <a href="https://www.tiktok.com/@tidehotelsandresorts" target="_blank" className="bg-white/10 hover:bg-white/20 p-3 rounded-sm transition-all flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest">
-                  <TikTokIcon size={18} /><span>TikTok</span>
-                </a>
-                <a href="https://api.whatsapp.com/send/?phone=2349111111314" target="_blank" className="bg-white/10 hover:bg-white/20 p-3 rounded-sm transition-all flex items-center space-x-2 text-[10px] uppercase font-black tracking-widest">
-                  <MessageCircle size={18} /><span>WhatsApp</span>
+                <a href="https://api.whatsapp.com/send/?phone=2349111111314" target="_blank" className="bg-white/10 hover:bg-white/20 p-2.5 rounded-sm transition-all flex items-center space-x-2 text-[8px] uppercase font-black tracking-widest">
+                  <MessageCircle size={16} /><span>WhatsApp</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {STAFF_LINKS.map((link) => (
-              <a key={link.title} href={link.url} target="_blank" onClick={() => handleResourceClick(link.title)} className={`bg-white p-8 border border-sand/40 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all group ${normalize(link.category) === normalize(getTeamDisplay(activeTeam)) ? 'ring-2 ring-terracotta ring-offset-4' : ''}`}>
-                <div className="flex justify-between items-start mb-6">
-                  <div className="bg-ivory p-3 group-hover:bg-terracotta group-hover:text-white transition-colors">
-                    <FileText size={24} />
+              <a key={link.title} href={link.url} target="_blank" onClick={() => handleResourceClick(link.title)} className={`bg-white p-6 md:p-8 border border-sand/40 shadow-sm hover:shadow-2xl transition-all group ${normalize(link.category) === normalize(getTeamDisplay(activeTeam)) ? 'ring-2 ring-terracotta ring-offset-2' : ''}`}>
+                <div className="flex justify-between items-start mb-4 md:mb-6">
+                  <div className="bg-ivory p-2.5 group-hover:bg-terracotta group-hover:text-white transition-colors">
+                    <FileText size={20} md:size={24} />
                   </div>
-                  <ExternalLink size={16} className="text-slate/10 group-hover:text-terracotta" />
+                  <ExternalLink size={14} className="text-slate/10 group-hover:text-terracotta" />
                 </div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[8px] uppercase tracking-[0.3em] font-black text-terracotta block">{link.category}</span>
+                  <span className="text-[7px] md:text-[8px] uppercase tracking-[0.2em] font-black text-terracotta block">{link.category}</span>
                   {normalize(link.category) === normalize(getTeamDisplay(activeTeam)) && <span className="bg-terracotta text-white text-[7px] px-1.5 py-0.5 rounded-full uppercase font-black">My Team</span>}
                 </div>
-                <h3 className="text-xl font-serif mb-3 group-hover:text-terracotta font-bold">{link.title}</h3>
-                <p className="text-xs text-slate/50 leading-relaxed">{link.description}</p>
+                <h3 className="text-lg md:text-xl font-serif mb-2 group-hover:text-terracotta font-bold">{link.title}</h3>
+                <p className="text-[10px] md:text-xs text-slate/50 leading-relaxed">{link.description}</p>
               </a>
             ))}
           </div>
 
+          {/* Table Container with Horizontal Scroll fix */}
           <div className="bg-white border border-sand/40 shadow-sm rounded-sm overflow-hidden">
-            <div className="p-5 bg-slate text-white flex justify-between items-center">
-              <h3 className="text-xl font-serif font-bold">Operation Logs</h3>
-              <div className="relative">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+            <div className="p-4 md:p-5 bg-slate text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <h3 className="text-lg md:text-xl font-serif font-bold">Operation Logs</h3>
+              <div className="relative w-full sm:w-auto">
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
                 <input 
                   type="text" 
                   placeholder="Search logs..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-white/10 border border-white/20 rounded-full pl-10 pr-4 py-1.5 text-xs outline-none focus:bg-white/20" 
+                  className="bg-white/10 border border-white/20 rounded-full pl-9 pr-4 py-1.5 text-[10px] outline-none focus:bg-white/20 w-full" 
                 />
               </div>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm min-w-[650px]">
-                <thead className="bg-ivory text-slate text-[8px] uppercase tracking-widest font-black border-b border-sand/20">
+            <div className="overflow-x-auto no-scrollbar touch-pan-x">
+              <table className="w-full text-left text-sm min-w-[500px]">
+                <thead className="bg-ivory text-slate text-[7px] uppercase tracking-widest font-black border-b border-sand/20">
                   <tr>
-                    <th className="px-6 py-4">Timestamp</th>
-                    <th className="px-6 py-4">Team</th>
-                    <th className="px-6 py-4">Action</th>
-                    <th className="px-6 py-4">Details</th>
+                    <th className="px-4 md:px-6 py-3">Time</th>
+                    <th className="px-4 md:px-6 py-3">Team</th>
+                    <th className="px-4 md:px-6 py-3">Action</th>
+                    <th className="px-4 md:px-6 py-3">Details</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-sand/10">
                   {filteredLogs.map((log) => (
                     <tr key={log.id} className="hover:bg-ivory/30 transition-colors">
-                      <td className="px-6 py-4 text-slate/50 font-mono text-[9px]">{log.timestamp}</td>
-                      <td className="px-6 py-4"><span className={`px-2 py-0.5 rounded-sm text-[8px] uppercase font-black ${normalize(log.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta/10 text-terracotta' : 'bg-slate/5 text-slate/40'}`}>{log.team}</span></td>
-                      <td className="px-6 py-4 font-bold text-slate text-[11px]">{log.action}</td>
-                      <td className="px-6 py-4 text-slate/60 text-[11px] italic truncate max-w-[200px]">{log.details}</td>
+                      <td className="px-4 md:px-6 py-3 text-slate/50 font-mono text-[8px] whitespace-nowrap">{log.timestamp.split(',')[1]}</td>
+                      <td className="px-4 md:px-6 py-3"><span className={`px-1.5 py-0.5 rounded-sm text-[7px] uppercase font-black whitespace-nowrap ${normalize(log.team) === normalize(getTeamDisplay(activeTeam)) ? 'bg-terracotta/10 text-terracotta' : 'bg-slate/5 text-slate/40'}`}>{log.team}</span></td>
+                      <td className="px-4 md:px-6 py-3 font-bold text-slate text-[10px] whitespace-nowrap">{log.action}</td>
+                      <td className="px-4 md:px-6 py-3 text-slate/60 text-[10px] italic truncate max-w-[150px]">{log.details}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -231,38 +223,31 @@ const StaffPortal: React.FC = () => {
           </div>
         </div>
 
-        <div className="space-y-10">
-          <div className="bg-slate text-white p-8 rounded-sm shadow-2xl relative overflow-hidden">
-            <h3 className="text-xl font-serif mb-6 flex items-center space-x-4 font-bold">
-              <Users size={24} />
+        <div className="space-y-8">
+          <div className="bg-slate text-white p-6 md:p-8 rounded-sm shadow-2xl relative overflow-hidden">
+            <h3 className="text-lg md:text-xl font-serif mb-6 flex items-center space-x-3 font-bold">
+              <Users size={20} />
               <span>Team Directory</span>
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {TEAM_STRUCTURE.map((dept) => (
-                <div key={dept} className={`flex justify-between items-center py-2.5 border-b border-white/5 last:border-0 ${normalize(dept) === normalize(getTeamDisplay(activeTeam)) ? 'text-sand font-bold' : 'text-white/60'}`}>
-                  <span className="text-xs tracking-wide font-light">{dept}</span>
-                  {normalize(dept) === normalize(getTeamDisplay(activeTeam)) ? (
-                    <div className="flex items-center space-x-2">
-                      <span className="text-[8px] uppercase font-black">You</span>
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    </div>
-                  ) : (
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
-                  )}
+                <div key={dept} className={`flex justify-between items-center py-2 border-b border-white/5 last:border-0 ${normalize(dept) === normalize(getTeamDisplay(activeTeam)) ? 'text-sand font-bold' : 'text-white/40'}`}>
+                  <span className="text-[10px] md:text-xs tracking-wide font-light">{dept}</span>
+                  {normalize(dept) === normalize(getTeamDisplay(activeTeam)) && <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>}
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-white p-8 border border-sand/30 rounded-sm shadow-sm">
-            <h4 className="font-accent text-[9px] font-black uppercase tracking-[0.4em] text-slate mb-6">Staff Ethos</h4>
-            <p className="text-xs text-slate/60 leading-relaxed italic mb-8">"Excellence is not an act, but a habit. We are building legacies with every interaction."</p>
-            <div className="space-y-4">
-               <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate/40 border-b border-sand/10 pb-2">
-                 <span>Active Status</span>
-                 <span className="text-green-600">Secure Connection</span>
+          <div className="bg-white p-6 md:p-8 border border-sand/30 rounded-sm shadow-sm">
+            <h4 className="font-accent text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] text-slate mb-4 md:mb-6">Staff Ethos</h4>
+            <p className="text-[10px] md:text-xs text-slate/60 leading-relaxed italic mb-6">"Excellence is not an act, but a habit. We are building legacies with every interaction."</p>
+            <div className="space-y-3">
+               <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest text-slate/40 border-b border-sand/10 pb-1.5">
+                 <span>Status</span>
+                 <span className="text-green-600">Secure</span>
                </div>
-               <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate/40 border-b border-sand/10 pb-2">
-                 <span>Current Team</span>
+               <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest text-slate/40 border-b border-sand/10 pb-1.5">
+                 <span>Team</span>
                  <span className="text-terracotta">{getTeamDisplay(activeTeam)}</span>
                </div>
             </div>
