@@ -12,7 +12,8 @@ const VALID_PASSWORDS = [
   'store',
   'whispers',
   'zenza',
-  'culinary'
+  'culinary',
+  'sales'
 ];
 
 // Helper to map password-based activeTeam to display team names

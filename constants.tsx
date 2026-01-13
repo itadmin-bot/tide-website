@@ -102,12 +102,19 @@ export const STAFF_LINKS: StaffLink[] = [
     description: "Access current guest feedback submissions and responses (In Progress).",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSf8gd-nVfGaUSz4j_plF-_325xf-wvGzBKUnwY7xJBexlRC3A/viewform?usp=dialog",
     category: "Guest Relations"
+  },
+  {
+    title: "GRO WHAT'S APP LOG",
+    description: "Official log for Guest Relations Office WhatsApp communications.",
+    url: "https://docs.google.com/spreadsheets/d/16BAZJeo8fpqSUKo-ERdYoSTkDes-rq1nit8Mw6cEeLc/edit?usp=sharing",
+    category: "Guest Relations"
   }
 ];
 
 export const TEAM_STRUCTURE = [
   "Guest Relations",
   "IT",
+  "Sales",
   "People Operation and Culture",
   "Facility & work",
   "Tidé Hotels & Resorts",
