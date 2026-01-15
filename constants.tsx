@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Room, StaffLink, Testimonial, MeetingRoom } from './types.ts';
 
@@ -215,8 +214,9 @@ export const ZENZA_DRINKS = [
       { name: "Four cousins Red", price: 15000 },
       { name: "Four cousins white", price: 15000 },
       { name: "Sweet lips", price: 14000 },
-      { name: "Chamdor", price: 11000 },
-      { name: "Veleta", price: 8000 },
+      { name: "Charmdor (Non-Alc)", price: 15000 },
+      { name: "J&w (Non-Alc)", price: 12000 },
+      { name: "Veleta (Non-Alc)", price: 8000 },
     ]
   },
   {
@@ -227,9 +227,8 @@ export const ZENZA_DRINKS = [
       { name: "Olmeca Tequila - Gold", price: 47000 },
       { name: "Bomabay Sapharie", price: 41000 },
       { name: "Absolute vodka Big", price: 38000 },
-      { name: "Gordon gin big", price: 12000 },
-      { name: "Skyy vodka small", price: 10000 },
       { name: "Gordon gin small", price: 4000 },
+      { name: "Skyy vodka small", price: 10000 },
     ]
   },
   {
@@ -248,21 +247,23 @@ export const ZENZA_DRINKS = [
   {
     category: "Beer & Softs",
     items: [
-      { name: "Black Bullet", price: 5000 },
-      { name: "Red Bull", price: 5000 },
-      { name: "Chi ice tea", price: 5000 },
-      { name: "Guiness Stout", price: 4000 },
+      { name: "Red Bull", price: 3000 },
+      { name: "Power horse (big)", price: 3000 },
+      { name: "Black bullet", price: 3000 },
       { name: "Cranberry juice", price: 3500 },
-      { name: "Henekin", price: 3000 },
-      { name: "Desperado", price: 3000 },
-      { name: "Smirnoff Double Black", price: 3000 },
       { name: "Pack juice", price: 3000 },
-      { name: "Soft drinks", price: 2000 },
-      { name: "Amstel malt", price: 2000 },
-      { name: "Trophy", price: 1600 },
+      { name: "Medium stout", price: 2700 },
+      { name: "Budweiser", price: 2700 },
+      { name: "Trophy", price: 2500 },
+      { name: "Legend", price: 2500 },
+      { name: "Orijin bitters", price: 2500 },
+      { name: "Power horse (small)", price: 2500 },
+      { name: "Heineken", price: 2000 },
+      { name: "Desperados", price: 1500 },
+      { name: "Smirnoff double black", price: 1500 },
+      { name: "Soft Drinks (Coke/Sprite/Fanta)", price: 1000 },
       { name: "Malts", price: 1000 },
-      { name: "Mojito", price: 1000 },
-      { name: "Water", price: 600 },
+      { name: "Water (60cl)", price: 600 },
     ]
   }
 ];
