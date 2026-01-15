@@ -142,13 +142,13 @@ export const STAFF_LINKS: StaffLink[] = [
   },
   {
     title: "Printer App",
-    description: "Receipt & Reservation Printer App (Requires separate password).",
+    description: "Printer App (Requires separate password).",
     url: "https://tide-hotels-and-resorts.vercel.app/",
     category: "App"
   },
   {
     title: "Guest Feedback Form",
-    description: "Access current guest feedback submissions and responses (In Progress).",
+    description: "Access current guest feedback submissions and responses.",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSf8gd-nVfGaUSz4j_plF-_325xf-wvGzBKUnwY7xJBexlRC3A/viewform?usp=dialog",
     category: "Guest Relations"
   },
@@ -177,14 +177,13 @@ export const ZENZA_DRINKS = [
   {
     category: "Whiskey",
     items: [
-      { name: "Glen 21 yrs", price: 320000 },
       { name: "Glen 18 yrs", price: 276425 },
       { name: "Glen 15 yrs", price: 174999 },
       { name: "Glen 12 yrs", price: 120000 },
-      { name: "Jameson Black Barrel", price: 79500 },
+      { name: "Jameson black barrel", price: 79500 },
       { name: "Black Label", price: 79000 },
       { name: "Jack Daniels", price: 56000 },
-      { name: "Jameson Green Irish", price: 48000 },
+      { name: "Jameson Green irish", price: 48000 },
       { name: "Williams Lawson", price: 31000 },
     ]
   },
@@ -194,7 +193,7 @@ export const ZENZA_DRINKS = [
       { name: "Hennessy XO", price: 790000 },
       { name: "Remy Martins XO", price: 675625 },
       { name: "Hennessy VSOP", price: 205000 },
-      { name: "Martel Blue Swift", price: 185250 },
+      { name: "Martel blue swift", price: 185250 },
       { name: "Hennessy VS", price: 180000 },
       { name: "Remy Martins VSOP", price: 158000 },
       { name: "Martel VS", price: 94000 },
@@ -207,25 +206,43 @@ export const ZENZA_DRINKS = [
       { name: "Escudo Rojo", price: 40000 },
       { name: "Martini Rosso", price: 27000 },
       { name: "Dostdy Hoff Big", price: 23000 },
-      { name: "Don Felders", price: 22000 },
-      { name: "Carlo Rossi (R/W/S)", price: 19000 },
-      { name: "4th Street", price: 18000 },
+      { name: "Algor wine", price: 20000 },
+      { name: "Carlo Rossi Red", price: 19000 },
+      { name: "Carlo Rossi White", price: 19000 },
+      { name: "Carlo Rossi sweet Red", price: 19000 },
+      { name: "4th street", price: 18000 },
       { name: "Declan", price: 15500 },
-      { name: "Four Cousins", price: 15000 },
-      { name: "Veleta (Non-Alc)", price: 8000 },
+      { name: "Four cousins Red", price: 15000 },
+      { name: "Four cousins white", price: 15000 },
+      { name: "Sweet lips", price: 14000 },
+      { name: "Chamdor", price: 11000 },
+      { name: "Veleta", price: 8000 },
     ]
   },
   {
     category: "Gin & Vodka",
     items: [
       { name: "Hendrick Gin", price: 85000 },
-      { name: "Ciroc Vodka", price: 80000 },
-      { name: "Bombay Sapphire", price: 41000 },
-      { name: "Absolute Vodka Big", price: 38000 },
-      { name: "Olmeca Tequila", price: 47000 },
+      { name: "Ciroc vodka", price: 80000 },
+      { name: "Olmeca Tequila - Gold", price: 47000 },
+      { name: "Bomabay Sapharie", price: 41000 },
+      { name: "Absolute vodka Big", price: 38000 },
+      { name: "Gordon gin big", price: 12000 },
+      { name: "Skyy vodka small", price: 10000 },
+      { name: "Gordon gin small", price: 4000 },
+    ]
+  },
+  {
+    category: "Liquor & Cream",
+    items: [
       { name: "Kahlua", price: 43000 },
-      { name: "Gordon Gin Big", price: 12000 },
-      { name: "Skyy Vodka Small", price: 10000 },
+      { name: "Amaretto", price: 36000 },
+      { name: "Vtimouth Rosso", price: 36000 },
+      { name: "Baileys", price: 35000 },
+      { name: "Peach Schapps", price: 33000 },
+      { name: "Blue Coraco", price: 30000 },
+      { name: "Campari medium", price: 30000 },
+      { name: "Campari small", price: 12000 },
     ]
   },
   {
@@ -233,15 +250,19 @@ export const ZENZA_DRINKS = [
     items: [
       { name: "Black Bullet", price: 5000 },
       { name: "Red Bull", price: 5000 },
-      { name: "Chi Ice Tea", price: 5000 },
-      { name: "Guinness Stout", price: 4000 },
-      { name: "Heineken", price: 3000 },
+      { name: "Chi ice tea", price: 5000 },
+      { name: "Guiness Stout", price: 4000 },
+      { name: "Cranberry juice", price: 3500 },
+      { name: "Henekin", price: 3000 },
       { name: "Desperado", price: 3000 },
       { name: "Smirnoff Double Black", price: 3000 },
-      { name: "Amstel Malt", price: 2000 },
-      { name: "Soft Drinks", price: 2000 },
+      { name: "Pack juice", price: 3000 },
+      { name: "Soft drinks", price: 2000 },
+      { name: "Amstel malt", price: 2000 },
       { name: "Trophy", price: 1600 },
-      { name: "Water (60cl)", price: 600 },
+      { name: "Malts", price: 1000 },
+      { name: "Mojito", price: 1000 },
+      { name: "Water", price: 600 },
     ]
   }
 ];
