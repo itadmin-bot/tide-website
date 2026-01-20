@@ -176,7 +176,7 @@ const Rooms: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center px-4 animate-fade-in" style={{ animationDelay: '400ms' }}>
               <a href="https://static.wixstatic.com/ugd/2b2af3_22b7b830a4af4853a65b109ed8d5ca3c.pdf" target="_blank" rel="noopener noreferrer" className="bg-transparent border-2 border-white/50 text-white px-12 py-5 font-accent text-[11px] font-black hover:bg-white hover:text-slate tracking-[0.4em] uppercase text-center backdrop-blur-md shadow-2xl transition-all">Download Portfolio</a>
-              <Link to="/booking" className="bg-terracotta text-white px-12 py-5 font-accent text-[11px] font-black hover:bg-slate tracking-[0.4em] uppercase shadow-2xl text-center transition-all hover:scale-105 active:scale-95">Personalize Stay</Link>
+              <a href="https://forms.zohopublic.com/francisokoronkwotidehot1/form/GuestFeedback/formperma/OtgiBPS4AfTZzRmIg21YzBYFeNqf1XFaBqCBaynhxPM" target="_blank" rel="noopener noreferrer" className="bg-terracotta text-white px-12 py-5 font-accent text-[11px] font-black hover:bg-slate tracking-[0.4em] uppercase shadow-2xl text-center transition-all hover:scale-105 active:scale-95">Personalize Stay</a>
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@ const Booking: React.FC = () => {
               <div className="p-3 bg-ivory/40 border border-sand/20 mb-8 rounded-sm">
                 <p className="text-[9px] text-slate/50 leading-relaxed italic">"Please fill in this form so we can prepare your reservation."</p>
               </div>
-              <a href="https://form.jotform.com/260042406631041" target="_blank" rel="noopener noreferrer" className="bg-terracotta text-white px-6 py-4 uppercase tracking-widest text-[10px] font-black hover:bg-slate transition-all shadow-xl flex items-center justify-center space-x-2 w-full text-center">
+              <a href="https://forms.zohopublic.com/francisokoronkwotidehot1/form/GuestFeedback/formperma/OtgiBPS4AfTZzRmIg21YzBYFeNqf1XFaBqCBaynhxPM" target="_blank" rel="noopener noreferrer" className="bg-terracotta text-white px-6 py-4 uppercase tracking-widest text-[10px] font-black hover:bg-slate transition-all shadow-xl flex items-center justify-center space-x-2 w-full text-center">
                 <span>Personalize My Stay</span><ExternalLink size={14} />
               </a>
             </div>
