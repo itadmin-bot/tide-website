@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { UtensilsCrossed, ExternalLink, Clock, ChefHat, Wine, GlassWater, Beer, Star } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { UtensilsCrossed, ExternalLink, Clock, ChefHat, Search, X, Star } from 'lucide-react';
 import { ZENZA_DRINKS } from '../constants.tsx';
 
 const Dining: React.FC = () => {
@@ -8,11 +8,13 @@ const Dining: React.FC = () => {
   const [displayCategory, setDisplayCategory] = useState(ZENZA_DRINKS[0].category);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategoryChange = (category: string) => {
     if (category === activeCategory || isTransitioning) return;
     setIsTransitioning(true);
     setActiveCategory(category);
+    setSearchQuery(''); // Reset search when changing category
     setTimeout(() => {
       setDisplayCategory(category);
       setIsTransitioning(false);
@@ -27,7 +29,20 @@ const Dining: React.FC = () => {
     }).format(price);
   };
 
-  const currentItems = ZENZA_DRINKS.find(c => c.category === displayCategory)?.items || [];
+  // Filter items based on category or search query
+  const filteredItems = useMemo(() => {
+    if (searchQuery.trim()) {
+      // Global search across all categories if searching
+      const allItems = ZENZA_DRINKS.flatMap(cat => 
+        cat.items.map(item => ({ ...item, category: cat.category }))
+      );
+      return allItems.filter(item => 
+        item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    // Category-based view
+    return ZENZA_DRINKS.find(c => c.category === displayCategory)?.items || [];
+  }, [displayCategory, searchQuery]);
 
   return (
     <div className="pb-10 md:pb-20">
@@ -99,7 +114,7 @@ const Dining: React.FC = () => {
       {/* Zenza Bar Section */}
       <section className="bg-slate py-12 md:py-24 text-white overflow-hidden relative border-y-[1px] border-white/5">
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-          <div className="text-center mb-8 md:mb-16 reveal-on-scroll sr-up">
+          <div className="text-center mb-8 md:mb-12 reveal-on-scroll sr-up">
             <span className="text-terracotta font-accent text-[9px] md:text-[11px] font-black block mb-3 tracking-[0.4em] uppercase">Zenith of Luxury</span>
             <h2 className="text-4xl md:text-8xl font-serif mb-3 font-bold text-white leading-none">Zenza</h2>
             <p className="text-sand/70 text-base md:text-xl font-serif italic max-w-2xl mx-auto leading-relaxed px-4">
@@ -107,36 +122,79 @@ const Dining: React.FC = () => {
             </p>
           </div>
 
-          <div className="mb-6 md:mb-12 overflow-x-auto pb-2 no-scrollbar touch-pan-x">
-            <div className="flex justify-start md:justify-center space-x-5 md:space-x-10 min-w-max px-4">
-              {ZENZA_DRINKS.map((cat) => (
-                <button
-                  key={cat.category}
-                  onClick={() => handleCategoryChange(cat.category)}
-                  className={`font-accent text-[9px] md:text-[11px] uppercase tracking-[0.2em] font-black transition-all pb-1.5 relative whitespace-nowrap py-1 ${
-                    activeCategory === cat.category ? 'text-terracotta' : 'text-sand/40 hover:text-white'
-                  }`}
+          {/* Search Bar - Brand Styling */}
+          <div className="max-w-md mx-auto mb-8 reveal-on-scroll sr-up" style={{ transitionDelay: '200ms' }}>
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Search size={16} className={`transition-colors duration-300 ${searchQuery ? 'text-terracotta' : 'text-sand/40'}`} />
+              </div>
+              <input 
+                type="text" 
+                placeholder="Find your spirit..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/[0.03] border border-white/10 text-white rounded-full py-3.5 pl-12 pr-12 outline-none focus:bg-white/[0.08] focus:border-terracotta/50 transition-all font-serif italic text-base placeholder:text-sand/20"
+              />
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery('')}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-sand/40 hover:text-white transition-colors"
                 >
-                  {cat.category}
-                  <span className={`absolute bottom-0 left-0 h-0.5 bg-terracotta transition-all duration-500 ease-out ${activeCategory === cat.category ? 'w-full opacity-100' : 'w-0 opacity-0'}`}></span>
+                  <X size={16} />
                 </button>
-              ))}
+              )}
             </div>
+            {searchQuery && (
+              <p className="text-[8px] uppercase tracking-widest text-center mt-3 text-terracotta font-black animate-fade-in">Searching across all collections</p>
+            )}
           </div>
+
+          {/* Category Tabs - Only show if not searching */}
+          {!searchQuery && (
+            <div className="mb-6 md:mb-12 overflow-x-auto pb-2 no-scrollbar touch-pan-x">
+              <div className="flex justify-start md:justify-center space-x-5 md:space-x-10 min-w-max px-4">
+                {ZENZA_DRINKS.map((cat) => (
+                  <button
+                    key={cat.category}
+                    onClick={() => handleCategoryChange(cat.category)}
+                    className={`font-accent text-[9px] md:text-[11px] uppercase tracking-[0.2em] font-black transition-all pb-1.5 relative whitespace-nowrap py-1 ${
+                      activeCategory === cat.category ? 'text-terracotta' : 'text-sand/40 hover:text-white'
+                    }`}
+                  >
+                    {cat.category}
+                    <span className={`absolute bottom-0 left-0 h-0.5 bg-terracotta transition-all duration-500 ease-out ${activeCategory === cat.category ? 'w-full opacity-100' : 'w-0 opacity-0'}`}></span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="max-w-4xl mx-auto min-h-[300px]">
             <div className={`grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 bg-white/[0.02] backdrop-blur-md p-6 md:p-12 border border-white/10 rounded-sm shadow-3xl transition-all duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-              {currentItems.map((item, idx) => (
-                <div key={`${displayCategory}-${item.name}`} className="group flex justify-between items-end border-b border-white/5 pb-3 px-1 hover:border-terracotta/40 transition-all animate-slide-up" style={{ animationDelay: `${idx * 20}ms`, animationFillMode: 'both' }}>
-                  <div className="space-y-0.5">
-                    <h4 className="font-serif text-base md:text-xl font-bold leading-tight">{item.name}</h4>
-                    <div className="flex items-center space-x-1 text-[6px] uppercase tracking-widest text-sand/20 font-black">
-                      <Star size={6} className="fill-terracotta text-terracotta" /><span>Signature</span>
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item, idx) => (
+                  <div key={`${item.name}-${idx}`} className="group flex justify-between items-end border-b border-white/5 pb-3 px-1 hover:border-terracotta/40 transition-all animate-slide-up" style={{ animationDelay: `${idx * 20}ms`, animationFillMode: 'both' }}>
+                    <div className="space-y-0.5">
+                      <h4 className="font-serif text-base md:text-xl font-bold leading-tight">{item.name}</h4>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1 text-[6px] uppercase tracking-widest text-sand/20 font-black">
+                          <Star size={6} className="fill-terracotta text-terracotta" /><span>Signature</span>
+                        </div>
+                        {searchQuery && 'category' in item && (
+                          <span className="text-[6px] uppercase tracking-widest text-terracotta/60 font-black border border-terracotta/20 px-1 rounded-sm">{(item as any).category}</span>
+                        )}
+                      </div>
                     </div>
+                    <span className="font-accent text-[10px] md:text-sm font-black text-sand/80">{formatPrice(item.price)}</span>
                   </div>
-                  <span className="font-accent text-[10px] md:text-sm font-black text-sand/80">{formatPrice(item.price)}</span>
+                ))
+              ) : (
+                <div className="col-span-full py-20 text-center space-y-4 animate-fade-in">
+                  <div className="text-sand/20"><Search size={48} className="mx-auto opacity-20" /></div>
+                  <p className="font-serif italic text-xl text-sand/40">No spirits found matching "{searchQuery}"</p>
+                  <button onClick={() => setSearchQuery('')} className="text-[9px] font-black uppercase tracking-widest text-terracotta border-b border-terracotta/30 pb-1">Reset Search</button>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
